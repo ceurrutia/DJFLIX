@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+ 
+  <title>DJ Flix Streaming</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  {% load static %}
+
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  <script src="{% static 'js/main.js' %}"></script>
+ 
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700|Raleway:300,400,400i,500,500i,700,800,900" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <!-- Vendor JS Files -->
+  <link href="{% static 'vendor/animate.css/animate.min.css' %} " rel="stylesheet">
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+  <header id="header" class="fixed-top d-flex align-items-center">
+    {% include 'header-nav.html' %}
+  </header>
+
+  
+  <section id="hero">
+    <div class="hero-container">
+      <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+
+        <ol id="hero-carousel-indicators" class="carousel-indicators"></ol>
+
+        <div class="carousel-inner" role="listbox">
+
+          <div class="carousel-item active" style="background-image:url({% static 'img/3.jpg' %})">
+            <div class="carousel-container">
+              <div class="container">
+                <h2 class="animate__animated animate__fadeInDown">Peliculas on demand </h2>
+                <p class="animate__animated animate__fadeInUp">DJ Flix Streaming</p>
+                <a href="#about" class="btn-get-started scrollto animate__animated animate__fadeInUp">Inicia sesion</a>
+                <a href="#about" class="btn-get-started scrollto animate__animated animate__fadeInUp">Registrate</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item" style="background-image: url({% static 'img/4.jpg' %})">
+            <div class="carousel-container">
+              <div class="container">
+                <h2 class="animate__animated animate__fadeInDown">Estreno: Wheathering with you</h2>
+                <p class="animate__animated animate__fadeInUp">Makoto Shinkai</p>
+                <a href="{% url "detallepelicula" %}" class="btn-get-started scrollto animate__animated animate__fadeInUp">Ver ahora</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+        </a>
+
+        <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+          <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <main id="main">
+
+    <!-- start formulario de acceso-->
+    <div id="about" class="about-area area-padding">
+      <div class="container">
+        <div class="row">
+
+    <!-- Start  login-->
+      
+      <div class="col-md-6">
+        <h1> Inicia sesion</h1>
+        <div class="form contact-form">
+          {% csrf_token %}
+          <form action="" method="post" role="form" class="php-email-form">
+            <div class="form-group mt-3">
+              <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
+            </div>
+            <div class="form-group mt-3">
+              <input type="password" class="form-control" name="password" id="password" placeholder="Contrasena" required>
+            </div>
+
+            
+            <div class="my-3">
+              <div class="error_login">No fue posible iniciar sesion. Usuario o contrasena no valido.</div>
+            </div>
+            <div class="text-center"><button type="submit">Inicia sesion</button></div>
+           
+          </form>
+        </div>
+      </div>
+      <!-- end login-->
+      <!-- start register-->
+      <div class="col-md-6">
+        <h1> Registrate</h1>
+        <div class="form contact-form">
+          {% csrf_token %}
+          <form action="" method="post" role="form" class="php-email-form">
+            <div class="form-group mt-3">
+              <input type="text" class="form-control" name="nombre_apellido" id="nombre_apellido" placeholder="Nombre y apellido" required>
+            </div>
+            <div class="form-group mt-3">
+              <input type="text" class="form-control" name="direccion" id="direccion" placeholder="Direccion" required>
+            </div>
+            <div class="form-group mt-3">
+              <input type="text" class="form-control" name="telefono" id="telefono" placeholder="telefono" required>
+            </div>
+            <div class="form-group mt-3">
+              <input type="text" class="form-control" name="dni" id="dni" placeholder="Dni" required>
+            </div>
+            <div class="form-group mt-3">
+              <input type="text" class="form-control" name="ciudad" id="dni" placeholder="Ciudad" required>
+            </div>
+            <div class="form-group mt-3">
+              <input type="text" class="form-control" name="pais" id="dni" placeholder="Pais" required>
+            </div>
+            <div class="form-group mt-3">
+              <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
+            </div>
+            <div class="form-group mt-3">
+              <input type="password" class="form-control" name="password" id="password" placeholder="Contrasena" required>
+            </div>
+            <div class="my-3">
+              <div class="error_login">No fue posible iniciar sesion. Usuario o contrasena no valido.</div>
+            </div>
+            <div class="text-center"><button type="submit">Registrate</button></div>
+           
+          </form>
+          <!-- end register-->
+        </div>
+      </div>
+ 
+      <!-- End form -->
+          
+        </div>
+
+
+       <!-- End form -->
+       
+      
+    </div>
+  </div>
+     
+
+    <div id="about" class="about-area area-padding">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="section-headline text-center">
+              <h2>Que es DjFlix? </h2>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <!-- single-well start-->
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="well-left">
+              <div class="single-well">
+                <a href="#">
+                  <img src="{% static 'img/cine1.jpg' %}">
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- single-well end-->
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="well-middle">
+              <div class="single-well">
+                <a href="#">
+                  <h4 class="sec-head">Nuestro proyecto</h4>
+                </a>
+                <p>
+                  Somos estudiantes de Python Django en Codo a Codo 4.0. Para este trabajo usamos:
+                </p>
+                <ul>
+                  <li>
+                    <i class="bi bi-check"></i> Python 3.11
+                  </li>
+                  <li>
+                    <i class="bi bi-check"></i> Django 4.2
+                  </li>
+                  <li>
+                    <i class="bi bi-check"></i> Boostrap 4
+                  </li>
+                  <li>
+                    <i class="bi bi-check"></i> RapidApi IMB Movies
+                  </li>
+                  
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!-- End col-->
+        </div>
+      </div>
+    </div><!-- End About Section --> 
+    
+     <!-- ======= Services Section ======= -->
+     <div id="services" class="services-area area-padding">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="section-headline services-head text-center">
+              <h2>Como usar Djflix</h2>
+            </div>
+          </div>
+        </div>
+        <div class="row text-center">
+          <!-- Start Left services -->
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="about-move">
+              <div class="services-details">
+                <div class="single-services">
+                  <a class="services-icon" href="#">
+                    <i class="bi bi-briefcase"></i>
+                  </a>
+                  <h4>Suscripcion</h4>
+                  <p>
+                    Suscripcion simple con tu tarjeta de credito completando tus datos de pago. 
+                  </p>
+                </div>
+              </div>
+              <!-- end about-details -->
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="about-move">
+              <div class="services-details">
+                <div class="single-services">
+                  <a class="services-icon" href="#">
+                    <i class="bi bi-card-checklist"></i>
+                  </a>
+                  <h4>Pago simple</h4>
+                  <p>
+                    Visa, Mastercard, Paypal.
+                  </p>
+                </div>
+              </div>
+              <!-- end about-details -->
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <!-- end col-md-4 -->
+            <div class=" about-move">
+              <div class="services-details">
+                <div class="single-services">
+                  <a class="services-icon" href="#">
+                    <i class="bi bi-bar-chart"></i>
+                  </a>
+                  <h4>Solicitud de baja</h4>
+                  <p>
+                    Podes darte de baja en cuaquier momento que lo desees.
+                  </p>
+                </div>
+              </div>
+              <!-- end about-details -->
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <!-- end col-md-4 -->
+            <div class=" about-move">
+              <div class="services-details">
+                <div class="single-services">
+                  <a class="services-icon" href="#">
+                    <i class="bi bi-binoculars"></i>
+                  </a>
+                  <h4>Categorias </h4>
+                  <p>
+                    Drama, Accion, Documentales, Anime, Hollywood, Comedias.
+                  </p>
+                </div>
+              </div>
+              <!-- end about-details -->
+            </div>
+          </div>
+          <!-- End Left services -->
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <!-- end col-md-4 -->
+            <div class=" about-move">
+              <div class="services-details">
+                <div class="single-services">
+                  <a class="services-icon" href="#">
+                    <i class="bi bi-brightness-high"></i>
+                  </a>
+                  <h4>Que mas?</h4>
+                  <p>
+                    Estrenos todas semanas antes que en el cine.
+                  </p>
+                </div>
+              </div>
+              <!-- end about-details -->
+            </div>
+          </div>
+          <!-- End Left services -->
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <!-- end col-md-4 -->
+            <div class=" about-move">
+              <div class="services-details">
+                <div class="single-services">
+                  <a class="services-icon" href="#">
+                    <i class="bi bi-calendar4-week"></i>
+                  </a>
+                  <h4>Soporte</h4>
+                  <p>
+                    24/7 completando el formulario de contacto.
+                  </p>
+                </div>
+              </div>
+              <!-- end about-details -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- End Services Section -->
+
+
+    
+
+
+  {% include 'footer.html' %}
+  <!-- Vendor JS Files -->
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

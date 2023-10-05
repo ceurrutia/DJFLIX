@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load static %}
+
+<main>
+
+  {% block content%}
+     <!-- ======= icon Section ======= -->
+<div id="contact" class="contact-area">
+  <div class="contact-inner area-padding">
+    <div class="contact-overly"></div>
+    <div class="container ">
+      
+      <div class="row">
+       <!-- Start contact icon column -->
+       <div class="col-md-4">
+        <div class="contact-icon text-center">
+          <div class="single-icon">
+            <i class="bi bi-phone"></i>
+            <p>
+              <span>{% if es_suscriptor %}
+                <p> <strong>Tu rol es:</strong> suscriptor </p>
+               
+                {% else %}
+                <p> Tu rol es: administrador </p>
+                {% endif %}</span>
+                <span>{% if usuario_conectado %}
+                  <p> <strong>Bienvenido:</strong> {{nombre_usuario}} </p>
+                 
+                  {% else %}
+                  <p> Tu rol es: administrador </p>
+                  {% endif %}</span>
+            </p>
+          </div>
+        </div>
+      </div>
+        <!-- Start contact icon column -->
+        <div class="col-md-4">
+          <div class="contact-icon text-center">
+            <div class="single-icon">
+              <i class="bi bi-calendar"></i>
+              <p>
+                Tus favoritos<br>
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- Start contact icon column -->
+        <div class="col-md-4">
+          <div class="contact-icon text-center">
+            <div class="single-icon">
+              <i class="bi bi-geo-alt"></i>
+              <p>
+                Ubicación: Buenos Aires, Argentina<br>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      
+
+      
+<!-- START GALERIA DE PELICULAS DISPONIBLES POR CATEGORIA-->
+        <div class="row justify-content-center">
+        {% for key, value in peliculas.items%}
+        <div class="card w-25" style="text-align:Left;">
+          <div class="card-body">
+            <h5 class="card-title">{{value.nombre| upper}}</h5>
+            <p class="card-text"><img class="pelis-zoom" src="{% get_static_prefix %}img/peliculas/{{value.imagen}}" width="200"></p>
+            <p class="card-text"><strong> Categoría: </strong>{{value.categoria}}</p>
+            <p class="card-text"><strong> Año de estreno: </strong>{{value.fecha}}</p>
+            <p class="card-text"><strong> Descripción: </strong>{{value.descripcion}}</p>
+            <input type="button" class="btn-get-started scrollto animate__animated animate__fadeInUp" value="Ver ahora">
+          
+          </div>
+        </div>
+            {% empty %}
+            <p> No hay peliculas disponibles </p>
+          {% endfor %}
+        </div>
+
+{%endblock%}
+        
+     <!-- END GALERIA DE PELICULAS -->
+    </main>
+   
+    
+</body>
+</html>

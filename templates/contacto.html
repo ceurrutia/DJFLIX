@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% include 'header_image.html' %}
+
+{% block content%}
+<!-- ======= Contact Section ======= -->
+<div id="contact" class="contact-area">
+  <div class="contact-inner area-padding">
+    <div class="contact-overly"></div>
+    <div class="container ">
+
+      <div class="row">
+        <!-- Start contact icon column -->
+        <div class="col-md-4">
+          <div class="contact-icon text-center">
+            <div class="single-icon">
+              <i class="bi bi-phone"></i>
+              <p>
+                <span>Lunes a Viernes (9am-5pm)</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- Start contact icon column -->
+        <div class="col-md-4">
+          <div class="contact-icon text-center">
+            <div class="single-icon">
+              <i class="bi bi-envelope"></i>
+              <p>
+                Email: info@djflix.com<br>
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- Start contact icon column -->
+        <div class="col-md-4">
+          <div class="contact-icon text-center">
+            <div class="single-icon">
+              <i class="bi bi-geo-alt"></i>
+              <p>
+                Ubicacion: Buenos Aires, Argentina<br>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <!-- Start  contact -->
+        <div class="col-md-12">
+
+          <div class="section-headline text-Left">
+            <h1>Contáctanos </h1>
+            <br>
+
+            <form method="post">
+
+
+              {% csrf_token %}
+              
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-success" role="alert">
+                  {{ message }} 
+                  <p>Mensaje enviado el: {{ahora | date:'d/m/y'}}</p>
+                </div>
+                {% endfor %}
+                {% endif %}
+
+
+              {{ formulario_contacto.nombreApellido.label_tag }}
+              {{ formulario_contacto.nombreApellido }}
+              {{ formulario_contacto.nombreApellido.errors }}
+
+              {{ formulario_contacto.edad.label_tag }}
+              {{ formulario_contacto.edad }}
+
+              {% if formulario_contacto.edad.errors %}
+              <div class="alert alert-danger">
+                {{ formulario_contacto.edad.errors }} <!-- Muestra el mensaje de error de edad menor a 18 -->
+              </div>
+              {% endif %}
+
+              {{ formulario_contacto.mail.label_tag }}
+              {{ formulario_contacto.mail }}
+              {% if formulario_contacto.mail.errors %}
+              <div class="alert alert-danger">
+                {{ formulario_contacto.mail.errors }} <!-- Muestra el mensaje de error mail invalido -->
+              </div>
+              {% endif %}
+
+              {{ formulario_contacto.telefono.label_tag }}
+              {{ formulario_contacto.telefono }}
+
+                {% if formulario_contacto.telefono.errors %}
+                <div class="alert alert-danger">
+                  {{ formulario_contacto.telefono.errors }} <!-- Muestra mensaje de error de telefono  -->
+                </div>
+                {% endif %}
+
+              {{ formulario_contacto.fecha.label_tag }}
+              {{ formulario_contacto.fecha }}
+
+
+                {% if formulario_contacto.fecha.errors %}
+                <div class="alert alert-danger">
+                  {{ formulario_contacto.fecha.errors }} <!-- Muestra siguiente mensaje de error -->
+                </div>
+                {% endif %}
+
+              {{ formulario_contacto.tipo_consulta.label_tag }}
+              {{ formulario_contacto.tipo_consulta }}
+              {{ formulario_contacto.tipo_consulta.errors }}
+
+              {{ formulario_contacto.mensaje.label_tag }}
+              {{ formulario_contacto.mensaje }}
+              {{ formulario_contacto.mensaje.errors }}
+              
+
+                <br> 
+              <input type="submit" class="btn-get-started scrollto animate__animated animate__fadeInUp" value="Enviar">
+
+
+          </div>
+        </div>
+      </div>
+    </div><!-- End Contact Section -->
+    {%endblock%}
