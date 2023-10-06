@@ -8,10 +8,14 @@
     <div id="about" class="about-area area-padding" style="background-color: #000;color:white; height: auto;">
       <div class="container">
         <div class="row" >
-          <h2>Viendo ahora: {{nombre_pelicula }}</h2>
+          <h2>Estas viendo ahora el trailer de: {{nombre_pelicula }}</h2>
           <iframe width="100%" height="650" src="https://www.youtube.com/embed/yLYbOe914ZU?si=5BN6uqN0d70V_m7-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          
+          <div class="text-center" style="padding: 20px; ">
+          <button type="button" class="btn btn-primary btn-lg" style="background: #f83319; border:none;">Inicia sesión para ver película</button>
+          </div>
         </div>
-      </div>
+      </div> 
    </main>
   
   {%endblock%}
