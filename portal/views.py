@@ -7,6 +7,14 @@ from django.template import Template
 from portal.forms import contactForm
 from django.contrib import messages
 from django.core.exceptions import ValidationError
+from django.core.mail import send_mail
+
+TIPO_CONSULTA = (
+    ('', '-Seleccione-'),
+    (1, 'Soporte'),
+    (2, 'Consultas sobre peliculas o series'),
+    (3, 'Trabajar en DJflix'),
+)
 
 
 # Create your views here.
@@ -30,6 +38,15 @@ def contacto(request):
         #validar
         formulario_contacto = contactForm(request.POST)
         if formulario_contacto.is_valid():
+            nombreApellido= formulario_contacto.cleaned_data.get('nombreApellido')
+            mail = formulario_contacto.cleaned_data.get('mail')
+            telefono = formulario_contacto.cleaned_data.get('telefono')
+            tipoconsulta = int(formulario_contacto.cleaned_data.get('tipo_consulta'))
+            for tupla in TIPO_CONSULTA:
+                if tupla[0]==tipoconsulta:
+                    tipo_de_consulta=tupla[1]
+            recibir_mail = formulario_contacto.cleaned_data.get('recibir_mail')
+            mensaje = formulario_contacto.cleaned_data.get('mensaje')
             # Validación personalizada: Comprobar la edad
             edad = formulario_contacto.cleaned_data.get('edad')
             if edad is not None and edad < 18:
@@ -37,6 +54,17 @@ def contacto(request):
             else:
                 # Procesar el formulario si la edad es válida
                 messages.success(request, 'Gracias! Hemos recibido sus datos. Muy pronto nos pondremos en contacto con usted')
+                #De acuerdo a checkbox, envia email con datos de formulario de contacto
+                if recibir_mail==True:
+                    send_mail(
+                        'Confirmacion de contacto con Djflix',
+                        f'''Gracias! Hemos recibido su mensaje. Muy pronto nos pondremos en contacto con usted 
+                        \nNombre y apellido:{nombreApellido}  \nEmail: {mail} \nEdad:{edad} \nTelefono:{telefono}\nTipo_consulta:{tipo_de_consulta} \nMensaje:{mensaje}''' ,
+                        'djflix.contacto@gmail.com',  # Remitente
+                        [mail],  # Lista de destinatarios
+                        fail_silently=False,  # Cambia a True para manejar errores silenciosamente
+                    )
+
                 # Procesa los datos muestra mensaje de agradecimiento
                 return redirect('Contacto')  
     else:

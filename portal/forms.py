@@ -11,8 +11,6 @@ def custom_validate_email(value):
 def clean_edad(self):
     if self.cleaned_data['edad'] < 18:
         raise ValidationError('El usuario no puede tener menos de 18 años')
-        
-           
 
 class contactForm(forms.Form):
     TIPO_CONSULTA = (
@@ -33,7 +31,8 @@ class contactForm(forms.Form):
         )
     edad = forms.IntegerField(
         label="Edad", 
-        min_value=18, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingresa tu edad'})
+        min_value=18, 
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingresa tu edad'})
         )
     telefono = forms.IntegerField(
         label="Telefono", 
@@ -50,3 +49,8 @@ class contactForm(forms.Form):
         required=False, 
         widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Escribe aqui tu consulta'})
         )
+    recibir_mail = forms.BooleanField(required=False, 
+        label="Quiero recibir por e-mail la informacion que estoy completando", 
+        initial=True,
+        widget=forms.CheckboxInput(attrs={})
+        )   
