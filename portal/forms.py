@@ -51,6 +51,6 @@ class contactForm(forms.Form):
         )
     recibir_mail = forms.BooleanField(required=False, 
         label="Quiero recibir por e-mail la informacion que estoy completando", 
-        initial=True,
+        initial=False,
         widget=forms.CheckboxInput(attrs={})
         )   
