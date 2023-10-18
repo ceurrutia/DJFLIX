@@ -21,5 +21,4 @@ urlpatterns = [
     
     path('', include("portal.urls")),
     path('', include("peliculas.urls"))
-    
 ]

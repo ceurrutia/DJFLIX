@@ -3,15 +3,10 @@ from django.urls import reverse
 from django.shortcuts import render
 from datetime import datetime
 from django.template import Template
-from peliculas.models import Pelicula
 
 # Create your views here.
 
 def peliculas(request):
-    
-    peliculas = Pelicula.objects.all()
-    
-    
     
     #return HttpResponse("<h1> Todas las peliculas </h1>" )
     #Contexto: el o  los datos que le damos a la plantilla para que se cargue

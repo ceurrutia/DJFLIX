@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'portal',
     'peliculas',
-    'django_extensions'
+    'django_extensions',
+    'administracion'
 ]
 
 MIDDLEWARE = [
