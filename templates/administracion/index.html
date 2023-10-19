@@ -1,0 +1,64 @@
+{% extends "administracion/base_admin.html" %}
+
+{% block content%}
+
+        <div id="app" class="table-results">
+            <table class="table">
+                <h2 class="text-center">Panel de administración</h2>
+                
+                <hr>
+
+               
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <h4> Listado de Peliculas</h4>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Nombre pelicula</th>
+                                        <th scope="col">Fecha estreno</th>
+                                        <th scope="col">Descripcion</th>
+                                        <th scope="col">Duracion</th>
+                                        <th scope="col">Categoria</th>
+                                        <th scope="col">Portada</th>
+                                        <th scope="col">Acciones</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Iterar sobre cada producto -->
+                                    <tr class="" v-for="pelicula in peliculas">
+                                        <td scope="row">{{peliculas.id}}</td>
+                                        <td>{{peliculas.nombre}}</td>
+                                        <td>{{peliculas.fecha_estreno}}</td>
+                                        <td>{{peliculas.descripcion}}</td>
+                                        <td>{{peliculas.duracion}}</td>
+                                        <td>{{peliculas.categoria}}</td>
+                                        
+  
+
+                                        <td>
+                                            <img width="150" :src="producto.imagen" :alt="producto.nombre">
+                                        </td> 
+                                        
+                                        <td>
+                                            <!-- Botón para editar el producto -->
+                                            <a class="btn btn-primary"
+                                                :href="'producto-update.html?id='+ producto.id">Editar</a>
+                                            <!-- Botón para eliminar el producto -->
+                                            <button type="button" class="btn btn-danger"
+                                                v-on:click="eliminar(producto.id)">Eliminar</button>
+                                        </td>
+
+                                        
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button type="button" class="btn btn-success" style="margin-right:5px;" ><a href={% url "create_pelicula" %}>Añadir
+                                nueva pelicula
+                            </a></button> 
+                            <button type="button" class="btn btn-success" ><a href="producto-create.html">Añadir
+                                nueva serie
+                            </a></button>
+                        </div>
+{% endblock%}

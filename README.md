@@ -14,17 +14,11 @@
 
 #Requierements:
 
-#﻿asgiref==3.7.2
+#asgiref==3.7.2
 #Django==4.2.6
 #psycopg2-binary==2.9.9
 #python-decouple==3.8
 #sqlparse==0.4.4
 #tzdata==2023.3
-<<<<<<< HEAD
-#psycopg2-binary==2.9.9
-#python-decouple==3.8
 #django-extensions==3.2.3
 
-=======
-#django-extensions==3.2.3
->>>>>>> 2ee7418c0f11480a79a9452979eace45e1e1d54c

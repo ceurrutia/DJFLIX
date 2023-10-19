@@ -1,0 +1,77 @@
+{% extends "administracion/base_admin.html" %}
+{% block content%}
+
+        <div id="app" class="table-results">
+            <table class="table">
+                <h2 class="text-center">Panel de administración</h2>
+                
+                <hr>
+
+               
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <h4> Añadir una nueva película</h4>
+                                <thead>
+                                    <tr>
+                                       
+                                        <th scope="col">Nombre pelicula</th>
+                                        <th scope="col">Fecha estreno</th>
+                                        <th scope="col">Descripcion</th>
+                                        <th scope="col">Duracion</th>
+                                        <th scope="col">Asociar Categoria</th>
+                                        <th scope="col">Portada</th>
+                                        <th scope="col">Acciones</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Iterar sobre cada producto -->
+                                    <tr class="" v-for="pelicula in peliculas">
+                                       
+                                        <td>{{peliculas.nombre}}</td>
+                                        <td>{{peliculas.fecha_estreno}}</td>
+                                        <td>{{peliculas.descripcion}}</td>
+                                        <td>{{peliculas.duracion}}</td>
+                                        <td>
+                                            <ul>
+                                            <li class="nav-item dropdown" style="color:#333;">
+                                                <a class="nav-link dropdown-toggle"  href="#" role="button" data-bs-toggle="dropdown"
+                                                    aria-expanded="false" style="color:#333;">
+                                                   Seleccionar
+                                                </a>
+                                            <ul class="dropdown-menu" style="color:#333;">
+                                                <li><a class="dropdown-item" style="color:#333;" href="producto-create.html">Drama</a></li>
+                                                <li><a class="dropdown-item" style="color:#333;" href="producto-create.html">Comedia</a></li>
+                                                <li><a class="dropdown-item" style="color:#333;" href="producto-create.html">Documental</a></li>
+                                                <li><a class="dropdown-item" style="color:#333;" href="producto-create.html">Accion</a></li>
+                                                <li><a class="dropdown-item" style="color:#333;" href="producto-create.html">Aventura</a></li>
+                                                <li><a class="dropdown-item" style="color:#333;" href="producto-create.html">Anime</a></li>
+                                                
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                        </td>
+
+
+  
+
+                                        <td>
+                                            <img width="150" :src="producto.imagen" :alt="producto.nombre">
+                                        </td> 
+                                        
+                                        <td>
+                                            <!-- Botón para grabar el registro -->
+                                            <a class="btn btn-primary"
+                                                :href="'producto-update.html?id='+ producto.id">Grabar</a>
+                                           
+                                        </td>
+
+                                        
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button type="button" class="btn btn-success" style="margin-right:5px;" ><a href={% url "create_pelicula" %}>Añadir
+                                nueva pelicula
+                            </a></button> 
+                        </div>
+{% endblock%}
