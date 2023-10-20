@@ -7,62 +7,17 @@
                 
                 <hr>
 
-                <h4 class="text-center" style="padding:20px;"> Añadir una nueva película</h4>
+                <h4 class="text-left" style="padding:20px;"> Añadir una nueva película</h4>
 
-                <div class="form-editar">
-                    <div class="box" id="app">
+               
 
-                        <form>
-
-                            <div class="mb-3">
-                                <label for="nombre">ID pelicula</label>
-                                <input type="text" class="form-control" name="id" id="id_pelicula" v-model="id">
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="nombre">Nombre de la pelicula</label>
-                                <input type="text" class="form-control" name="nombre" id="nombre" v-model="nombre">
-                            </div>
-                            <div class="mb-3">
-                                <label for="fecha_estreno" > Fecha de estreno </label>
-                                <input type="date" class="form-control" name="fecha_estreno" id="fecha_estreno" v-model="fecha_estreno">
-                            </div>
-                            <div class="mb-3">
-                                <label for="Descripcion">Descripcion</label>
-                                <input type="textarea" class="form-control" name="stock" id="stock" v-model="stock">
-                            </div>
-                            <div class="mb-3">
-                                <label for="Descripcion">Duracion</label>
-                                <input type="text" class="form-control" name="duracion" id="duracion" v-model="duracion">
-                            </div>
-                            <div class="mb-3">
-                                <label for="Descripcion">Asociar Categoria</label>
-                                <ul>
-                                    <li class="nav-item dropdown" style="color:#333;">
-                                        <a class="nav-link dropdown-toggle"  href="#" role="button" data-bs-toggle="dropdown"
-                                            aria-expanded="false" style="color:#333;">
-                                           Seleccionar
-                                        </a>
-                                    <ul class="dropdown-menu" style="color:#333;">
-                                        <li><a class="dropdown-item" style="color:#333;" href="producto-create.html">Drama</a></li>
-                                        <li><a class="dropdown-item" style="color:#333;" href="producto-create.html">Comedia</a></li>
-                                        <li><a class="dropdown-item" style="color:#333;" href="producto-create.html">Documental</a></li>
-                                        <li><a class="dropdown-item" style="color:#333;" href="producto-create.html">Accion</a></li>
-                                        <li><a class="dropdown-item" style="color:#333;" href="producto-create.html">Aventura</a></li>
-                                        <li><a class="dropdown-item" style="color:#333;" href="producto-create.html">Anime</a></li>
-                                        
-                                    </ul>
-                            </div>
-                            <div class="mb-3">
-                                <label for="imagen">Imagen (Copia y pega la url de la imagen)</label>
-                                <input type="text" class="form-control" name="imagen" id="imagen" v-model="imagen">
-                                
-
-                            </div>
-
-                            <button type="button" class="btn btn-success" v-on:click="grabar()">Grabar nueva pelicula en la base de datos</button>
-                        </form>
-                    </div>
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form_alta_pelicula.as_p }}
+                    <button type="button" class="btn btn-success" v-on:click="grabar()">Grabar nueva pelicula en la base de datos</button>
+                </form>
+                
+                </div>
                 </div>
                          
 {% endblock%}

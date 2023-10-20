@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.shortcuts import render
 from datetime import datetime
 from django.template import Template
+from administracion.forms import FormAltaPelicula
 
 # Create your views here.
 def administracion(request):
@@ -14,4 +15,15 @@ def base_admin(request):
 
 
 def create_pelicula(request):
-    return render(request, "administracion/create_pelicula.html")
+    context = {}
+    
+    if request.method == "POST":
+        alta_pelicula = FormAltaPelicula()
+    
+    else:
+        alta_pelicula = FormAltaPelicula()
+    
+    
+    context['form_alta_pelicula'] = FormAltaPelicula
+    
+    return render(request, 'administracion/create_pelicula.html', context)
