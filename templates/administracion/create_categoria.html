@@ -1,0 +1,23 @@
+{% extends "administracion/base_admin.html" %}
+{% block content%}
+
+        <div id="app" class="table-results">
+            <table class="table">
+                <h2 class="text-center">Panel de administración</h2>
+                
+                <hr>
+
+                <h4 class="text-left" style="padding:20px;"> Añadir una nueva categoría</h4>
+
+               
+
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form_alta_categoria.as_p }}
+                    <button type="button" class="btn btn-success" v-on:click="grabar()">Grabar nueva categoria en la base de datos</button>
+                </form>
+                
+                </div>
+                </div>
+                         
+{% endblock%}

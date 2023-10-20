@@ -5,14 +5,11 @@ from django.core.exceptions import ValidationError
 
 class Persona(models.Model):
     nombre_apellido = models.CharField(verbose_name='Nombre y Apellido', max_length=500)
-    direccion = models.CharField(verbose_name='Direccion', max_length=700)
     dni = models.IntegerField(verbose_name= "DNI")
     email = models.EmailField(verbose_name="Email", max_length=250)
-    pais = models.CharField(verbose_name='Pais', max_length=200)
-    ciudad = models.CharField(verbose_name='Ciudad', max_length=200)
 
     def __str__(self) -> str:
-        return f'{self.nombre_apellido} - {self.dni} - {self.direccion}  -  {self.email} - {self.pais} - {self.ciudad} '
+        return f'{self.nombre_apellido} - {self.dni} -  {self.email} '
 
 
     def clean_dni(self):
@@ -36,37 +33,30 @@ class Persona(models.Model):
         
 class Suscriptor(Persona):
     fecha_inicio = models.DateField(verbose_name="Fecha de Inicio")
-    tipo_plan = models.CharField(verbose_name="plan", max_length=200)
     baja = models.DateField(verbose_name="baja", default=False)
 
 
 class Categorias(models.Model):
-    nombre = models.CharField(verbose_name="Nombre", max_length=100)
+    nombre_categoria = models.CharField(verbose_name="Nombre categoria", max_length=100)
 
 
-class Peliculas(models.Model):
-    nombre = models.CharField(verbose_name="Nombre Pelicula", max_length=200)
-    fecha_estreno = models.DateField(verbose_name="Fecha de estreno")
-    descripcion = models.TextField(verbose_name="Descripcion", max_length=500)
-    portada = models.ImageField(upload_to='imagenes/', null=True, verbose_name="Portada")
-    duracion = models.DateTimeField(verbose_name="Duracion")
-    clasificacion = models.CharField(verbose_name= "Clasificacion", max_length=250)
-    categoria = models.ForeignKey(Categorias, on_delete=models.CASCADE)
+class Pelicula(models.Model):
+    nombre_pelicula = models.CharField(verbose_name="Nombre Pelicula", max_length=200)
+    descripcion_pelicula = models.TextField(verbose_name="Descripcion", max_length=500)
+    categoria_pelicula = models.ForeignKey(Categorias, on_delete=models.CASCADE)
+    portada_pelicula = models.ImageField(upload_to='imagenes/', null=True, verbose_name="Portada")
+    enlace_pelicula = models.TextField(verbose_name="Enlace", max_length=500)
     es_serie = False
-    enlace = models.TextField(verbose_name="Enlace", max_length=500)
-    #suscriptor = models.ManyToManyField(Suscriptor, through="Visualizaciones")
     baja = models.DateField(verbose_name="baja")
+    
 
-
-class Capitulos(models.Model):
-    capitulo_numero= models.IntegerField(verbose_name= "Capitulo Número",null=True)
+class Serie(Pelicula):
+    numero_capitulo= models.IntegerField(verbose_name= "Número de Capitulo",null=True)
     nombre_capitulo = models.CharField(verbose_name="Nombre del Capitulo", max_length=200)
-    id_pelicula = models.ForeignKey(Peliculas, on_delete=models.CASCADE)
-    descripcion = models.TextField(verbose_name="Descripcion", max_length=500)
-    portada = models.ImageField(upload_to='imagenes/', null=True, verbose_name="Portada")
-    duracion = models.DateTimeField(verbose_name="Duracion")
-    enlace = models.TextField(verbose_name="Enlace", max_length=500)
-    baja = models.DateField(verbose_name="baja")
+    descripcion_capitulo = models.TextField(verbose_name="Descripcion", max_length=500)
+    portada_capitulo = models.ImageField(upload_to='imagenes/', null=True, verbose_name="Portada")
+    enlace_capitulo = models.TextField(verbose_name="Enlace", max_length=500)
+    baja_capitulo = models.DateField(verbose_name="baja")
 
 
 class Visualizaciones(models.Model):
@@ -78,7 +68,8 @@ class Visualizaciones(models.Model):
         abstract=True
 
 class Visualizaciones_peliculas(Visualizaciones):
-    id_pelicula = models.ForeignKey(Peliculas, on_delete=models.CASCADE)
+    id_pelicula = models.ForeignKey(Pelicula, on_delete=models.CASCADE)
+    
 
-class Visualizaciones_capitulo(Visualizaciones):
-    id_capitulo = models.ForeignKey(Capitulos, on_delete=models.CASCADE)
+class Visualizaciones_series(Visualizaciones):
+    id_serie = models.ForeignKey(Serie, on_delete=models.CASCADE)

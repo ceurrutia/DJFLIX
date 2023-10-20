@@ -11,34 +11,20 @@
                
                         <div class="table-responsive">
                             <table class="table table-bordered">
-                                <h4> Listado de Peliculas</h4>
+                                <h4> Listado de Categorias</h4>
                                 <thead>
                                     <tr>
                                         <th scope="col">ID</th>
-                                        <th scope="col">Nombre pelicula</th>
-                                        <th scope="col">Descripcion</th>
-                                        <th scope="col">Categoria</th>
-                                        <th scope="col">Portada</th>
-                                        <th scope="col">Enlace</th>
+                                        <th scope="col">Nombre categoria</th>
                                         <th scope="col">Acciones</th>
-                                        
+
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <!-- Iterar sobre cada producto -->
-                                    <tr class="" v-for="pelicula in peliculas">
-                                        <td scope="row">{{peliculas.id}}</td>
-                                        <td>{{peliculas.nombre}}</td>
-                                       
-                                        <td>{{peliculas.descripcion}}</td>
-                                        <td>{{peliculas.enlace}}</td>
-                                        <td>{{peliculas.categoria}}</td>
-                                        
-  
-
-                                        <td>
-                                            <img width="150" :src="producto.imagen" :alt="producto.nombre">
-                                        </td> 
+                                    <tr class="" v-for="categoria in categorias">
+                                        <td scope="row">{{categorias.id}}</td>
+                                        <td>{{categorias.nombre}}</td>
                                         
                                         <td>
                                             <!-- Botón para editar el producto -->
