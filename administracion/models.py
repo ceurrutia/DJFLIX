@@ -70,4 +70,8 @@ class Visualizaciones_pelicula(Visualizaciones):
 
 class Visualizaciones_capitulo(Visualizaciones):
     suscriptor=models.ForeignKey(Suscriptor, on_delete=models.CASCADE)
+<<<<<<< HEAD
     capitulo=models.ForeignKey(Capitulo, on_delete=models.CASCADE)
+=======
+    capitulo=models.ForeignKey(Capitulo, on_delete=models.CASCADE)
+>>>>>>> c393118a36e0584e01f85e41c15f3fe96035ac2b
