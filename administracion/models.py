@@ -11,7 +11,6 @@ class Persona(models.Model):
     def __str__(self) -> str:
         return f'{self.nombre_apellido} - {self.dni} -  {self.email} '
 
-
     def clean_dni(self):
         #len(str(self.cleaned_data['dni'])) == 8
         if (0 < self.cleaned_data['dni'] <= 99999999):
@@ -25,51 +24,50 @@ class Persona(models.Model):
         
         return self.cleaned_data['email']
 
-
     class Meta:
      abstract = True
-     
-    
         
 class Suscriptor(Persona):
     fecha_inicio = models.DateField(verbose_name="Fecha de Inicio")
-    baja = models.DateField(verbose_name="baja", default=False)
-
+    baja = models.DateField(verbose_name="baja", null=True)
 
 class Categorias(models.Model):
     nombre_categoria = models.CharField(verbose_name="Nombre categoria", max_length=100)
 
+class Video (models.Model):
+    nombre= models.CharField(verbose_name="Nombre", max_length=200)
+    descripcion = models.TextField(verbose_name="Descripcion", max_length=500)
+    categoria = models.ForeignKey(Categorias, on_delete=models.CASCADE)
+    portada = models.ImageField(upload_to='imagenes/', null=True, verbose_name="Portada")
+    enlace = models.TextField(verbose_name="Enlace", max_length=500)
+    baja = models.DateField(verbose_name="baja", null=True)
 
-class Pelicula(models.Model):
-    nombre_pelicula = models.CharField(verbose_name="Nombre Pelicula", max_length=200)
-    descripcion_pelicula = models.TextField(verbose_name="Descripcion", max_length=500)
-    categoria_pelicula = models.ForeignKey(Categorias, on_delete=models.CASCADE)
-    portada_pelicula = models.ImageField(upload_to='imagenes/', null=True, verbose_name="Portada")
-    enlace_pelicula = models.TextField(verbose_name="Enlace", max_length=500)
-    es_serie = False
-    baja = models.DateField(verbose_name="baja")
-    
+    class Meta:
+     abstract = True
 
-class Serie(Pelicula):
-    numero_capitulo= models.IntegerField(verbose_name= "Número de Capitulo",null=True)
-    nombre_capitulo = models.CharField(verbose_name="Nombre del Capitulo", max_length=200)
-    descripcion_capitulo = models.TextField(verbose_name="Descripcion", max_length=500)
-    portada_capitulo = models.ImageField(upload_to='imagenes/', null=True, verbose_name="Portada")
-    enlace_capitulo = models.TextField(verbose_name="Enlace", max_length=500)
-    baja_capitulo = models.DateField(verbose_name="baja")
+class Pelicula(Video):
+    suscriptor=models.ManyToManyField(Suscriptor, through="Visualizaciones_pelicula")
 
+class Serie(Video):
+    cant_capitulos= models.IntegerField(verbose_name="Cantidad de capítulos")
+
+class Capitulo(Video):
+    categoria = None # Elimina el campo categoria de esta clase 
+    serie=models.ForeignKey(Serie, on_delete=models.CASCADE)
+    numero_capitulo= models.IntegerField(verbose_name= "Número de Capitulo")
+    suscriptor=models.ManyToManyField(Suscriptor, through="Visualizaciones_capitulo")
 
 class Visualizaciones(models.Model):
-    id_suscriptor = models.ForeignKey(Suscriptor, on_delete=models.CASCADE)
     fecha = models.DateField(verbose_name="Fecha de vista")
     tiempo_visto = models.DurationField(verbose_name="Tiempo visto")
-    
+
     class Meta:
-        abstract=True
+        abstract = True
 
-class Visualizaciones_peliculas(Visualizaciones):
-    id_pelicula = models.ForeignKey(Pelicula, on_delete=models.CASCADE)
-    
+class Visualizaciones_pelicula(Visualizaciones):
+    suscriptor=models.ForeignKey(Suscriptor, on_delete=models.CASCADE)
+    pelicula=models.ForeignKey(Pelicula, on_delete=models.CASCADE)
 
-class Visualizaciones_series(Visualizaciones):
-    id_serie = models.ForeignKey(Serie, on_delete=models.CASCADE)
+class Visualizaciones_capitulo(Visualizaciones):
+    suscriptor=models.ForeignKey(Suscriptor, on_delete=models.CASCADE)
+    capitulo=models.ForeignKey(Capitulo, on_delete=models.CASCADE)

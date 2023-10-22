@@ -1,0 +1,58 @@
+{% extends "administracion/base_admin.html" %}
+
+{% block content%}
+
+        <div id="app" class="table-results">
+            <table class="table">
+                <h2 class="text-center">Panel de administración</h2>
+                
+                <hr>
+
+               
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <h4> Listado de Suscriptores</h4>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Nombre y Apellido</th>
+                                        <th scope="col">DNI</th>
+                                        <th scope="col">Email </th>
+                                        <th scope="col">Fecha inicio </th>
+                                        <th scope="col">Fecha baja</th>
+                                        <th scope="col">Acciones</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Iterar sobre cada producto -->
+                                    <tr class="" v-for="suscriptor in suscriptores">
+                                        <td scope="row">{{suscriptores.id}}</td>
+                                        <td>{{suscriptores.nombreApellido}}</td>
+                                        <td>{{suscriptores.DNI}}</td>
+                                        <td>{{suscriptores.Email}}</td>
+                                        <td>{{suscriptores.fecha_inicio}}</td>
+                                        <td>{{suscriptores.baja}}</td>
+
+                                        
+                                        <td>
+                                            <!-- Botón para editar el producto -->
+                                            <a class="btn btn-primary"
+                                                :href="'producto-update.html?id='+ producto.id">Editar</a>
+                                            <!-- Botón para eliminar el producto -->
+                                            <button type="button" class="btn btn-danger"
+                                                v-on:click="eliminar(producto.id)">Eliminar</button>
+                                        </td>
+
+                                        
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button type="button" class="btn btn-success" style="margin-right:5px;" ><a href={% url "create_pelicula" %}>Añadir
+                                nueva pelicula
+                            </a></button> 
+                            <button type="button" class="btn btn-success" ><a href="producto-create.html">Añadir
+                                nueva serie
+                            </a></button>
+                        </div>
+{% endblock%}
