@@ -19,6 +19,13 @@ def create_pelicula(request):
     
     if request.method == "POST":
         alta_pelicula = FormAltaPelicula()
+        if create_pelicula.is_valid():
+            nombre = FormAltaPelicula.cleaned_data['nombre']
+            descripcion = FormAltaPelicula.cleaned_data['descripcion']
+            categoria = FormAltaPelicula.cleaned_data['categoria']
+            portada = FormAltaPelicula.cleaned_data['portada']
+            enlace = FormAltaPelicula()
+            alta_pelicula.save()
     
     else:
         alta_pelicula = FormAltaPelicula()

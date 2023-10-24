@@ -14,7 +14,7 @@
                 <form method="POST">
                     {% csrf_token %}
                     {{ form_alta_pelicula.as_p }}
-                    <button type="button" class="btn btn-success" v-on:click="grabar()">Grabar nueva pelicula en la base de datos</button>
+                    <button type="button" class="btn btn-success" action="save">Grabar nueva pelicula en la base de datos</button>
                 </form>
                 
                 </div>
