@@ -7,7 +7,7 @@
                 <h2 class="text-center">Panel de administración</h2>
                 
                 <hr>
-
+               
                
                         <div class="table-responsive">
                             <table class="table table-bordered">
@@ -26,15 +26,16 @@
                                 </thead>
                                 <tbody>
                                     <!-- Iterar sobre cada producto -->
-                                    <tr class="" v-for="pelicula in peliculas">
+                                    <tr >
+                                        {% for pelicula in peliculas %}
                                         <td scope="row">{{peliculas.id}}</td>
-                                        <td>{{peliculas.nombre}}</td>
-                                       
-                                        <td>{{peliculas.descripcion}}</td>
-                                        <td>{{peliculas.enlace}}</td>
-                                        <td>{{peliculas.categoria}}</td>
+                                        <td>{{pelicula.nombre}}</td>
+                                        <td>{{pelicula.descripcion}}</td>
+                                        <td>{{pelicula.categoria}}</td>
+                                        <td>{{pelicula.portada}}</td>
                                         
-  
+                                        
+                                        {% endfor %}
 
                                         <td>
                                             <img width="150" :src="producto.imagen" :alt="producto.nombre">

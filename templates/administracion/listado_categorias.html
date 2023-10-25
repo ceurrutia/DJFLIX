@@ -8,6 +8,7 @@
                 
                 <hr>
 
+
                
                         <div class="table-responsive">
                             <table class="table table-bordered">
@@ -21,11 +22,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- Iterar sobre cada producto -->
-                                    <tr class="" v-for="categoria in categorias">
-                                        <td scope="row">{{categorias.id}}</td>
-                                        <td>{{categorias.nombre}}</td>
-                                        
+                                    <!-- Iterar sobre cada categoria -->
+                                    <tr  {% for categoria in categorias %}>
+                                        <td scope="row">{{ categoria.id }}</td>
+                                        <td>{{ categoria.nombre_categoria }}</td>
+                                        {% endfor %}
                                         <td>
                                             <!-- Botón para editar el producto -->
                                             <a class="btn btn-primary"
@@ -39,11 +40,9 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <button type="button" class="btn btn-success" style="margin-right:5px;" ><a href={% url "create_pelicula" %}>Añadir
-                                nueva pelicula
+                            <button type="button" class="btn btn-success" style="margin-right:5px;" ><a href={% url "create_categoria" %}>Añadir
+                                nueva categoria
                             </a></button> 
-                            <button type="button" class="btn btn-success" ><a href="producto-create.html">Añadir
-                                nueva serie
-                            </a></button>
+                            
                         </div>
 {% endblock%}

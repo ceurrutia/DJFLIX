@@ -5,13 +5,15 @@ from datetime import datetime
 from django.template import Template
 from administracion.forms import FormAltaPelicula
 from administracion.forms import FormAltaCategoria, FormAltaSuscriptor
+from .models import Categorias, Suscriptor, Pelicula
 
 # Create your views here.
 
 #listado y crear peliculas
 
 def administracion(request):
-    return render(request, "administracion/index.html")
+    peliculas = Pelicula.objects.all()  # Obtiene todas las pelis desde la base de datos
+    return render(request, "administracion/index.html" , {'peliculas': peliculas})
 
 
 def create_pelicula(request):
@@ -40,10 +42,10 @@ def create_pelicula(request):
 def base_admin(request):
     return render(request, "administracion/base_admin.html")
 
-#Categorias
 
 def listado_categorias(request):
-    return render(request, "administracion/listado_categorias.html")
+    categorias = Categorias.objects.all()  # Obtiene todas las categorías desde la base de datos
+    return render(request, "administracion/listado_categorias.html", {'categorias': categorias})
 
 
 def create_categoria(request):
@@ -63,7 +65,8 @@ def create_categoria(request):
 #suscriptores
 
 def listado_suscriptores(request):
-    return render(request, "administracion/listado_suscriptores.html")
+    suscriptores = Suscriptor.objects.all()  # Obtiene todos los suscribers desde la base de datos
+    return render(request, "administracion/listado_suscriptores.html", {'suscriptores': suscriptores})
 
 
 

@@ -33,6 +33,9 @@ class Suscriptor(Persona):
 
 class Categorias(models.Model):
     nombre_categoria = models.CharField(verbose_name="Nombre categoria", max_length=100)
+    
+    def __str__(self) -> str:
+        return f'{self.nombre_categoria} '
 
 class Video (models.Model):
     nombre= models.CharField(verbose_name="Nombre", max_length=200)
@@ -47,15 +50,25 @@ class Video (models.Model):
 
 class Pelicula(Video):
     suscriptor=models.ManyToManyField(Suscriptor, through="Visualizaciones_pelicula")
+    
+    def __str__(self) -> str:
+        return f'{self.nombre} '
 
 class Serie(Video):
     cant_capitulos= models.IntegerField(verbose_name="Cantidad de capítulos")
+   
+   
+    def __str__(self) -> str:
+        return f'{self.nombre} '
 
 class Capitulo(Video):
     categoria = None # Elimina el campo categoria de esta clase 
     serie=models.ForeignKey(Serie, on_delete=models.CASCADE)
     numero_capitulo= models.IntegerField(verbose_name= "Número de Capitulo")
     suscriptor=models.ManyToManyField(Suscriptor, through="Visualizaciones_capitulo")
+    
+    def __str__(self) -> str:
+        return f'{self.nombre} '
 
 class Visualizaciones(models.Model):
     fecha = models.DateField(verbose_name="Fecha de vista")

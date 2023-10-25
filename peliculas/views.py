@@ -3,46 +3,20 @@ from django.urls import reverse
 from django.shortcuts import render
 from datetime import datetime
 from django.template import Template
-
+from administracion.models import Pelicula
 # Create your views here.
 
+
 def peliculas(request):
-    
-    #return HttpResponse("<h1> Todas las peliculas </h1>" )
-    #Contexto: el o  los datos que le damos a la plantilla para que se cargue
+    peliculas = Pelicula.objects.all()  # Obtiene todas las películas desde la base de datos
     context = {
-        'peliculas': {
-            '0': {'nombre':'Gladiador',
-                'fecha': datetime.now(),
-                'categoria': 'Aventura/Acción',
-                'imagen': 'gladiador.jpg',
-                'descripcion': 'Un general de Roma es vendido a una escuela de gladiadores',
-                },
-            '1': {'nombre': 'The Matrix',
-                'fecha': datetime.now(),
-                'categoria': 'Ciencia Ficción',
-                'imagen': 'matrix.jpg',
-                'descripcion': 'Knock, knock, follow the white rabbit',
-            },
-            '3': {'nombre': 'Oppenhaimer',
-                'fecha': datetime.now(),
-                'categoria': 'Accion',
-                'imagen': 'oppenhaimer.jpg',
-                'descripcion': 'La historia del creador de la bomba atomica que se libero sobre Hiroshima y Nagasaki',
-            },
-            '4': {'nombre': 'Kimi no na wa',
-                'fecha': datetime.now(),
-                'categoria': 'Anime',
-                'imagen': 'kimi-no.jpg',
-                'descripcion': 'Mitsuha se despierta en el cuerpo de Taki, un adolescente de Tokio',
-            },
-        },
-        'es_suscriptor': True, 
+        'peliculas': peliculas,  
+        'es_suscriptor': True,
         'usuario_conectado': True,
         'nombre_usuario': 'Genérico',
     }
-    
     return render(request, "peliculas.html", context)
+
 
 
 def detallepelicula(request):

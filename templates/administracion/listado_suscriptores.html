@@ -7,7 +7,6 @@
                 <h2 class="text-center">Panel de administración</h2>
                 
                 <hr>
-
                
                         <div class="table-responsive">
                             <table class="table table-bordered">
@@ -26,14 +25,17 @@
                                 </thead>
                                 <tbody>
                                     <!-- Iterar sobre cada producto -->
-                                    <tr class="" v-for="suscriptor in suscriptores">
-                                        <td scope="row">{{suscriptores.id}}</td>
-                                        <td>{{suscriptores.nombreApellido}}</td>
-                                        <td>{{suscriptores.DNI}}</td>
-                                        <td>{{suscriptores.Email}}</td>
-                                        <td>{{suscriptores.fecha_inicio}}</td>
-                                        <td>{{suscriptores.baja}}</td>
-
+                                    <tr >
+                                        {% for suscriptor in suscriptores %}
+                                        <td scope="row">{{suscriptor.id}}</td>
+                                        <td>{{ suscriptor.nombre_apellido }}</td>
+                                        <td>{{suscriptor.dni}}</td>
+                                        <td>{{suscriptor.email}}</td>
+                                        <td>{{suscriptor.fecha_inicio}}</td>
+                                        <td>{{suscriptor.baja}}</td>
+                                        
+                                        
+                                        {% endfor %}
                                         
                                         <td>
                                             <!-- Botón para editar el producto -->
@@ -48,11 +50,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <button type="button" class="btn btn-success" style="margin-right:5px;" ><a href={% url "create_pelicula" %}>Añadir
-                                nueva pelicula
-                            </a></button> 
-                            <button type="button" class="btn btn-success" ><a href="producto-create.html">Añadir
-                                nueva serie
-                            </a></button>
+                            
+                           
                         </div>
 {% endblock%}
