@@ -115,36 +115,10 @@
         <form method="POST">
           {% csrf_token %}
           {{ form_alta_suscriptor.as_p }}
-          <button type="button" class="btn btn-success" v-on:click="grabar()">Registrarse</button>
+          <button type="button" class="btn btn-success">Registrarse</button>
       </form>
 
 
-
-
-        <div class="form contact-form">
-          {% csrf_token %}
-          <form action="" method="post" role="form" class="php-email-form">
-            <div class="form-group mt-3">
-              <input type="text" class="form-control" name="nombre_apellido" id="nombre_apellido" placeholder="Nombre y apellido" required>
-            </div>
-            
-            <div class="form-group mt-3">
-              <input type="text" class="form-control" name="dni" id="dni" placeholder="Dni" required>
-            </div>
-            
-            <div class="form-group mt-3">
-              <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
-            </div>
-            <div class="form-group mt-3">
-              <input type="password" class="form-control" name="password" id="password" placeholder="Contrasena" required>
-            </div>
-            <div class="my-3">
-              <div class="error_login">No fue posible iniciar sesion. Usuario o contrasena no valido.</div>
-            </div>
-            <div class="text-center"><button type="submit">Registrate</button></div>
-           
-          </form>
-          <!-- end register-->
         </div>
       </div>
  
@@ -330,7 +304,7 @@
         </div>
       </div>
     </div><!-- End Services Section -->
-
+    
 
     
 

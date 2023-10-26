@@ -14,7 +14,7 @@
                 <form method="POST">
                     {% csrf_token %}
                     {{ form_alta_categoria.as_p }}
-                    <button type="button" class="btn btn-success" v-on:click="grabar()">Grabar nueva categoria en la base de datos</button>
+                    <button type="submit" class="btn btn-success">Grabar nueva categoria en la base de datos</button>
                 </form>
                 
                 </div>

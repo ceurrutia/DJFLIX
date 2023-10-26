@@ -22,25 +22,29 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <tr>
                                     <!-- Iterar sobre cada categoria -->
-                                    <tr  {% for categoria in categorias %}>
-                                        <td scope="row">{{ categoria.id }}</td>
+                                         {% for categoria in categorias %}
+                                        <td >{{ categoria.id }}</td>
                                         <td>{{ categoria.nombre_categoria }}</td>
-                                        {% endfor %}
+                                       
                                         <td>
-                                            <!-- Botón para editar el producto -->
+                                           
+                                            <!-- Botón para editar categoria -->
                                             <a class="btn btn-primary"
                                                 :href="'producto-update.html?id='+ producto.id">Editar</a>
-                                            <!-- Botón para eliminar el producto -->
+                                            <!-- Botón para eliminar categoria -->
                                             <button type="button" class="btn btn-danger"
                                                 v-on:click="eliminar(producto.id)">Eliminar</button>
+                                                
                                         </td>
-
+                                        
                                         
                                     </tr>
+                                    {% endfor %}
                                 </tbody>
                             </table>
-                            <button type="button" class="btn btn-success" style="margin-right:5px;" ><a href={% url "create_categoria" %}>Añadir
+                            <button type="submit" class="btn btn-success" style="margin-right:5px;" ><a href={% url "create_categoria" %}>Añadir
                                 nueva categoria
                             </a></button> 
                             
