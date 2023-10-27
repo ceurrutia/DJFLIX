@@ -27,7 +27,7 @@
                                     <!-- Iterar sobre cada producto -->
                                     <tr >
                                         {% for suscriptor in suscriptores %}
-                                        <td scope="row">{{suscriptor.id}}</td>
+                                        <td >{{suscriptor.id}}</td>
                                         <td>{{ suscriptor.nombre_apellido }}</td>
                                         <td>{{suscriptor.dni}}</td>
                                         <td>{{suscriptor.email}}</td>
@@ -35,7 +35,7 @@
                                         <td>{{suscriptor.baja}}</td>
                                         
                                         
-                                        {% endfor %}
+                                        
                                         
                                         <td>
                                             <!-- Botón para editar el producto -->
@@ -48,6 +48,7 @@
 
                                         
                                     </tr>
+                                    {% endfor %}
                                 </tbody>
                             </table>
                             

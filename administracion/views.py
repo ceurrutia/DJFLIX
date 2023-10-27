@@ -26,20 +26,21 @@ def create_pelicula(request):
         alta_pelicula = FormAltaPelicula(request.POST) #paso request al form
         if alta_pelicula.is_valid():
             #Guardo en a ddbb
-            nombre = alta_pelicula.cleaned_data['nombre']
-            descripcion = alta_pelicula.cleaned_data['descripcion']
-            categoria = alta_pelicula.cleaned_data['categoria']
-            portada = alta_pelicula.cleaned_data['portada']
-            enlace = alta_pelicula.cleaned_data['enlace']
+            nombre_pelicula = alta_pelicula.cleaned_data['nombre_pelicula']
+            descripcion_pelicula = alta_pelicula.cleaned_data['descripcion_pelicula']
+            categoria_pelicula = alta_pelicula.cleaned_data['categoria_pelicula']
+            portada_pelicula = alta_pelicula.cleaned_data['portada_pelicula']
+            enlace_pelicula = alta_pelicula.cleaned_data['enlace_pelicula']
             
             # Creo instancia de Pelicula y guardar
-            nueva_pelicula = Pelicula(nombre=nombre, descripcion=descripcion, categoria=categoria, portada=portada, enlace=enlace)
+            nueva_pelicula = Pelicula(nombre_pelicula=nombre_pelicula, descripcion_pelicula=descripcion_pelicula, categoria_pelicula=categoria_pelicula, portada_pelicula=portada_pelicula ,  enlace_pelicula= enlace_pelicula)
             nueva_pelicula.save()
+            
+            messages.success(request, "Se ha creado una pelicula nueva")
+            
         else:
-            return redirect('administracion/listado_peliculas.html')  # Redirige a la página del listado peliculas
-
-    
-    
+            return redirect('administracion/create_pelicula.html')
+          
     else:
         alta_pelicula = FormAltaPelicula()
     
@@ -100,10 +101,12 @@ def create_suscriptor(request):
             nombreApellido = alta_suscriptor.cleaned_data['nombreApellido']
             dni = alta_suscriptor.cleaned_data['dni']
             email = alta_suscriptor.cleaned_data['email']
-
+            fecha_inicio = alta_suscriptor.cleaned_data['fecha_inicio']
+            
             # Creo una instancia de Suscriptor
-            nuevo_suscriptor = Suscriptor(nombreApellido=nombreApellido, dni=dni, email=email)
+            nuevo_suscriptor = Suscriptor(nombre_apellido=nombreApellido, dni=dni, email=email, fecha_inicio=fecha_inicio)
             nuevo_suscriptor.save()
+            return render(request, 'alta_suscriptor.html')
            
         else:
             # Errores en el formulario

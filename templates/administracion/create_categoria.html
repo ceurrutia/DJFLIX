@@ -13,6 +13,16 @@
 
                 <form method="POST">
                     {% csrf_token %}
+
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-success" role="alert">
+                      {{ message }} 
+                      <p>Mensaje enviado el: {{ahora | date:'d/m/y'}}</p>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    
                     {{ form_alta_categoria.as_p }}
                     <button type="submit" class="btn btn-success">Grabar nueva categoria en la base de datos</button>
                 </form>

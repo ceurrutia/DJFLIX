@@ -19,6 +19,7 @@ class FormAltaCategoria(forms.Form):
     
 
 class FormAltaSuscriptor(forms.Form):
-    nombreApellido = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese su nombre completo'}))
+    nombreApellido = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese su nombre completo'}))
     dni = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese su DNI'}))
     email = forms.EmailField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese su mail'}))
+    fecha_inicio=forms.DateField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese fecha de inicio'}))

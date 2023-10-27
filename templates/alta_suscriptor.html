@@ -22,8 +22,18 @@
   
               <form method="POST">
                 {% csrf_token %}
+
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-success" role="alert">
+                  {{ message }} 
+                  <p>Mensaje enviado el: {{ahora | date:'d/m/y'}}</p>
+                </div>
+                {% endfor %}
+                {% endif %}
+                
                 {{ form_alta_suscriptor.as_p }}
-                <button type="button" class="btn btn-success">Registrarse</button>
+                <button type="submit" class="btn btn-success">Registrarse</button>
             </form>
             </div>
           </div>

@@ -13,8 +13,19 @@
 
                 <form method="POST">
                     {% csrf_token %}
+              
+                        {% if messages %}
+                        {% for message in messages %}
+                        <div class="alert alert-success" role="alert">
+                        {{ message }} 
+                        <p>Mensaje enviado el: {{ahora | date:'d/m/y'}}</p>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+
+
                     {{ form_alta_pelicula.as_p }}
-                    <button type="button" class="btn btn-success" action="save">Grabar nueva pelicula en la base de datos</button>
+                    <button type="submit" class="btn btn-success">Grabar</button>
                 </form>
                 
                 </div>

@@ -54,3 +54,6 @@ class contactForm(forms.Form):
         initial=False,
         widget=forms.CheckboxInput(attrs={})
         )   
+    
+    
+    
