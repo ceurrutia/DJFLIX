@@ -5,18 +5,32 @@ from django.shortcuts import redirect
 from datetime import datetime
 from django.template import Template
 from administracion.forms import FormAltaPelicula
-from administracion.forms import FormAltaCategoria, FormAltaSuscriptor
+from administracion.forms import FormAltaCategoria, FormAltaSuscriptor, FormEditCategoria
 from .models import Categorias, Suscriptor, Pelicula
-from .forms import FormAltaCategoria
 from django.contrib import messages
+from django.shortcuts import get_object_or_404
+from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 
 # Create your views here.
 
 #listado y crear peliculas
 
+'''
+Tradicional de Django
+
 def administracion(request):
     peliculas = Pelicula.objects.all()  # Obtiene todas las pelis desde la base de datos
     return render(request, "administracion/index.html" , {'peliculas': peliculas})
+'''
+#Vista basada en Clase
+
+class PeliculasListView(ListView):
+    
+    model = Pelicula
+    context_object_name = 'peliculas'
+    template_name = 'administracion/index.html'
+    ordering = ['id']
+
 
 
 def create_pelicula(request):
@@ -64,7 +78,7 @@ def create_categoria(request):
     context = {}
     
     if request.method == "POST":
-        alta_categoria = FormAltaCategoria(request.POST)  # Pasamos request al form
+        alta_categoria = FormAltaCategoria(request.POST) 
         if alta_categoria.is_valid():
             # Guardamos datos en la ddbb
             nombre_categoria = alta_categoria.cleaned_data['nombre_categoria']
@@ -106,7 +120,7 @@ def create_suscriptor(request):
             # Creo una instancia de Suscriptor
             nuevo_suscriptor = Suscriptor(nombre_apellido=nombreApellido, dni=dni, email=email, fecha_inicio=fecha_inicio)
             nuevo_suscriptor.save()
-            return render(request, 'alta_suscriptor.html')
+            return render(request, 'alta_suscriptor.html')           
            
         else:
             # Errores en el formulario

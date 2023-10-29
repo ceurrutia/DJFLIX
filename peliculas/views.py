@@ -10,7 +10,7 @@ from administracion.models import Pelicula
 def peliculas(request):
     peliculas = Pelicula.objects.all()  # Obtiene todas las películas desde la base de datos
     context = {
-        'peliculas': peliculas,  
+        'peliculas': peliculas, 
         'es_suscriptor': True,
         'usuario_conectado': True,
         'nombre_usuario': 'Genérico',

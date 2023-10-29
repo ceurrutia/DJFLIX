@@ -35,7 +35,7 @@
                                         <td>{{pelicula.portada}}</td>
                                         
                                         
-                                        {% endfor %}
+                                       
 
                                         <td>
                                             <img width="150" :src="producto.imagen" :alt="producto.nombre">
@@ -52,6 +52,7 @@
 
                                         
                                     </tr>
+                                    {% endfor %}
                                 </tbody>
                             </table>
                             <button type="button" class="btn btn-success" style="margin-right:5px;" ><a href={% url "create_pelicula" %}>Añadir

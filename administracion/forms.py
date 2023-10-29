@@ -17,6 +17,15 @@ class FormAltaCategoria(forms.Form):
     )
     
     
+class FormEditCategoria(forms.Form):
+    nombre_categoria = forms.CharField(label = 'nombre categoria', required=True, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese nuevo nombre de la  categoria'}) )  
+    
+    def __init__(self, *args, **kwargs):
+        
+        super(FormEditCategoria, self).__init__(*args, **kwargs)
+        self.fields['nombre_categoria'].widget.attrs.update({'class': 'form-control'})
+
+
 
 class FormAltaSuscriptor(forms.Form):
     nombreApellido = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese su nombre completo'}))
