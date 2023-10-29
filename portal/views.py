@@ -8,6 +8,7 @@ from portal.forms import contactForm
 from django.contrib import messages
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
+from .models import Contacto
 
 TIPO_CONSULTA = (
     ('', '-Seleccione-'),
@@ -64,6 +65,16 @@ def contacto(request):
                         [mail],  # Lista de destinatarios
                         fail_silently=False,  # Cambia a True para manejar errores silenciosamente
                     )
+                c1= Contacto(
+                    nombre_y_apellido = formulario_contacto.cleaned_data.get('nombreApellido'),
+                    edad= formulario_contacto.cleaned_data.get('edad'),
+                    telefono= formulario_contacto.cleaned_data.get('telefono'),
+                    email=formulario_contacto.cleaned_data.get('mail'),
+                    tipo_de_consulta= formulario_contacto.cleaned_data.get('tipo_consulta'),
+                    mensaje = formulario_contacto.cleaned_data.get('mensaje'),
+                    se_envio_email= formulario_contacto.cleaned_data.get('recibir_mail')
+                )
+                c1.save()
 
                 # Procesa los datos muestra mensaje de agradecimiento
                 return redirect('Contacto')  
