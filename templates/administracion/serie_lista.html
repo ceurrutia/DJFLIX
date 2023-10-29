@@ -1,0 +1,52 @@
+{% extends "administracion/base_admin.html" %}
+
+{% block content%}
+
+        <div id="app" class="table-results">
+            <table class="table">
+                <h2 class="text-center">Panel de administración</h2>
+                
+                <hr>
+
+
+               
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <h4> Listado de series</h4>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Nombre serie</th>
+                                        <th scope="col">accion</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                    <!-- Iterar sobre cada serie -->
+                                         {% for serie in serie %}
+                                        <td >{{ serie.id }}</td>
+                                        <td>{{ serie.nombre }}</td>
+                                       
+                                        <td>
+                                           
+                                            <!-- Botón para editar serie -->
+                                            <a class="btn btn-primary"
+                                               >Editar</a>
+                                            <!-- Botón para eliminar serie -->
+                                            <button type="button" class="btn btn-danger"
+                                                >Eliminar</button>
+                                                
+                                        </td>
+                                        
+                                        
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            <button type="submit" class="btn btn-success" style="margin-right:5px;" ><a href={% url "serie_crear" %}>Añadir
+                                nueva serie
+                            </a></button> 
+                            
+                        </div>
+{% endblock%}

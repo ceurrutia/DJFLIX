@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% include 'header_image.html' %}
+
+{% block content%}
+
+
+<!-- ======= Contact Section ======= -->
+<div id="contact" class="contact-area">
+    <div class="contact-inner area-padding">
+      <div class="contact-overly"></div>
+      <div class="container ">
+
+
+        <div class="row">
+          <!-- Start  contact -->
+          <div class="col-md-12">
+  
+            <div class="section-headline text-Left">
+              <h1>Serie </h1>
+              <br>
+  
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" value="Guardar">
+                </form>
+                <a href="{% url 'serie_lista' %}">Volver a la lista</a>
+            </div>
+          </div>
+        </div>
+      </div><!-- End Contact Section -->
+
+
+{%endblock%}

@@ -1,15 +1,15 @@
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseServerError
 from django.urls import reverse
-from django.shortcuts import render
-from django.shortcuts import redirect
+from django.shortcuts import render, redirect
 from datetime import datetime
 from django.template import Template
 from administracion.forms import FormAltaPelicula
 from administracion.forms import FormAltaCategoria, FormAltaSuscriptor, FormEditCategoria
-from .models import Categorias, Suscriptor, Pelicula
+from .models import Categorias, Suscriptor, Pelicula, Serie
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView
+from administracion.forms import SerieForm
 
 # Create your views here.
 
@@ -53,6 +53,7 @@ def create_pelicula(request):
             messages.success(request, "Se ha creado una pelicula nueva")
             
         else:
+#            return redirect('administracion/create_pelicula.html')
             return redirect('administracion/create_pelicula.html')
           
     else:
@@ -60,6 +61,7 @@ def create_pelicula(request):
     
     context['form_alta_pelicula'] = alta_pelicula
     
+#    return render(request, 'administracion/create_pelicula.html', context)
     return render(request, 'administracion/create_pelicula.html', context)
 
 
@@ -97,6 +99,28 @@ def create_categoria(request):
     
     return render(request, 'administracion/create_categoria.html', context)
 
+def serie_lista(request):
+    series = Serie.objects.all() 
+    return render(request, "administracion/serie_lista.html", {'serie': series})
+
+
+def serie_crear(request):
+    if request.method == 'POST':
+        form = SerieForm(request.POST)
+        if form.is_valid():
+            s1= Serie(
+                nombre =form.cleaned_data.get('nombre'),
+                descripcion = form.cleaned_data.get('descripcion'),
+                categoria =  Categorias.objects.get(id=form.cleaned_data.get('categoria')),
+                portada = form.cleaned_data.get('portada'),
+                enlace = form.cleaned_data.get('enlace'),
+                cant_capitulos=0
+            )
+            s1.save()
+            return redirect('serie_lista')
+    else:
+        form = SerieForm()
+    return render(request, 'administracion/serie_crear.html', {'form': form})
 
 #suscriptores
 

@@ -55,8 +55,11 @@ class Pelicula(Video):
         return f'{self.nombre} '
 
 class Serie(Video):
-    cant_capitulos= models.IntegerField(verbose_name="Cantidad de capítulos")
-   
+    cant_capitulos= models.IntegerField(verbose_name="Cantidad de capítulos", null=True)
+
+    def __str__(self) -> str:
+        return f'{self.nombre} '
+
    
     def __str__(self) -> str:
         return f'{self.nombre} '
