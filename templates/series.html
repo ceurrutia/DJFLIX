@@ -59,15 +59,16 @@
 
 <!-- START GALERIA DE series DISPONIBLES POR CATEGORIA-->
 <div class="row justify-content-center">
-  {% for serie in listado_series%}
+  {% for serie in series %}
   <div class="card w-25" style="text-align:Left;">
     <div  style="text-align: left">
-      <h5 class="card-title">{{serie.nombre| upper}}</h5>
-      <p class="card-text"><img class="pelis-zoom" src="{% get_static_prefix %}img/peliculas/{{serie.imagen}}" width="200"></p>
-      <p class="card-text"><strong> Categoría: </strong>{{serie.categoria}}</p>
-      <p class="card-text"><strong> Año de estreno: </strong>{{serie.anio}}</p>
-      <p class="card-text"><strong> Descripción: </strong>{{serie.descripcion}}</p>
+      <h5 class="card-title">{{ serie.nombre | upper }}</h5>
+      <p class="card-text"><img class="pelis-zoom" src="{{ serie.portada }}" width="200"></p>
+      <p class="card-text"><strong> Categoría: </strong>{{ serie.categoria }}</p>
+      <p class="card-text"><strong> Descripción: </strong>{{ serie.descripcion }}</p>
  
+
+
       <strong> Capítulos: </strong>
       <div>
         <table style="padding: 8px">
@@ -79,7 +80,15 @@
           </tr>
           {% endfor %}
         </ol>
+
+        <form action = "{% url "detallepelicula" %}">
+          <button class="btn-get-started scrollto animate__animated animate__fadeInUp">
+              Ver ahora
+          </button>
+      </form>
         </table>
+
+       
       </div>
     </div>
   </div>

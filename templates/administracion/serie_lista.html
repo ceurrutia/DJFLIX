@@ -4,20 +4,23 @@
 
         <div id="app" class="table-results">
             <table class="table">
-                <h2 class="text-center">Panel de administración</h2>
+                <h2 class="text-center">Listado de series</h2>
                 
                 <hr>
-
-
+               
                
                         <div class="table-responsive">
                             <table class="table table-bordered">
-                                <h4> Listado de series</h4>
+                                <h4> Listado de Peliculas</h4>
                                 <thead>
                                     <tr>
                                         <th scope="col">ID</th>
                                         <th scope="col">Nombre serie</th>
-                                        <th scope="col">accion</th>
+                                        <th scope="col">Descripcion</th>
+                                        <th scope="col">Categoria</th>
+                                        <th scope="col">Portada</th>
+                                        <th scope="col">Enlace</th>
+                                        <th scope="col">Acciones</th>
 
                                     </tr>
                                 </thead>
@@ -27,6 +30,9 @@
                                          {% for serie in serie %}
                                         <td >{{ serie.id }}</td>
                                         <td>{{ serie.nombre }}</td>
+                                        <td>{{serie.descripcion}}</td>
+                                        <td>{{serie.categoria}}</td>
+                                        <td>{{serie.portada}}</td>
                                        
                                         <td>
                                            
