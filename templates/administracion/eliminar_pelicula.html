@@ -1,0 +1,24 @@
+{% extends "administracion/base_admin.html" %}
+{% block content%}
+
+        <div id="app" class="table-results">
+            <table class="table">
+                <h2 class="text-center">Panel de administración</h2>
+        
+          <div class="col-md-12">
+  
+            <div class="section-headline text-Left">
+              <h1>Confirmar eliminacion </h1>
+              <p>¿Estás seguro de que deseas eliminar esta pelicula?</p>
+                    <form method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="Confirmar eliminacion">
+                </form>
+                <a href="{% url 'listado_peliculas' %}">Volver a la lista</a>
+            </div>
+          </div>
+        </div>
+      </div><!-- End Contact Section -->
+
+
+{%endblock%}

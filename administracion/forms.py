@@ -3,22 +3,23 @@ from django import forms
 from django.core.exceptions import ValidationError
 from .models import Categorias, Serie
 
-class FormAltaPelicula(forms.Form):
+class PeliculaForm(forms.Form):
     lista_categorias=[]
     for categoria in Categorias.objects.all():
         lista_categorias.append((categoria.id, categoria.nombre_categoria))
-    nombre_pelicula = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese nombre de la pelicula'}))
-    descripcion_pelicula = forms.CharField(max_length=500, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Solo texto'}))
-    categoria_pelicula = forms.ChoiceField(choices=lista_categorias)
-    portada_pelicula = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese url de imagen'}))
-    enlace_pelicula = forms.URLField(required = True, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese url de enlace'}))
+
+    nombre = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese nombre de la pelicula'}))
+    descripcion = forms.CharField(max_length=500, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Solo texto'}))
+    categoria = forms.ChoiceField(choices=lista_categorias)
+    portada = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese url de imagen'}))
+    enlace = forms.URLField(required = True, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese url de enlace'}))
+
     
 class FormAltaCategoria(forms.Form):
     nombre_categoria = forms.CharField(label='Nombre categoría:', required=True,
     widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese nombre de la nueva categoria, ej: Drama'})
     )
 
-from django import forms
 
 class SerieForm(forms.Form):
     lista_categorias=[]

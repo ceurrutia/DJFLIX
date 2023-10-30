@@ -6,60 +6,16 @@
             <table class="table">
                 <h2 class="text-center">Panel de administración</h2>
                 
+<h3> Listas </h3>
+                <ul >
+                    <li><a style="color:black" href="{% url "listado_categorias" %}">Categorias</a></li>
+                    <li><a style="color:black" href="{% url "listado_peliculas" %}">Peliculas</a></li>
+                    <li><a  style="color:black" href="{% url "serie_lista" %}">Series</a></li>
+                    <li><a  style="color:black" href="{% url "listado_suscriptores" %}">Suscriptores</a></li>
+
+                </ul>
                 <hr>
                
-               
-                        <div class="table-responsive">
-                            <table class="table table-bordered">
-                                <h4> Listado de Peliculas</h4>
-                                <thead>
-                                    <tr>
-                                        <th scope="col">ID</th>
-                                        <th scope="col">Nombre pelicula</th>
-                                        <th scope="col">Descripcion</th>
-                                        <th scope="col">Categoria</th>
-                                        <th scope="col">Portada</th>
-                                        <th scope="col">Enlace</th>
-                                        <th scope="col">Acciones</th>
-                                        
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- Iterar sobre cada producto -->
-                                    <tr >
-                                        {% for pelicula in peliculas %}
-                                        <td >{{peliculas.id}}</td>
-                                        <td>{{pelicula.nombre}}</td>
-                                        <td>{{pelicula.descripcion}}</td>
-                                        <td>{{pelicula.categoria}}</td>
-                                        <td>{{pelicula.portada}}</td>
-                                        
-                                        
-                                       
-
-                                        <td>
-                                            <img width="150" :src="producto.imagen" :alt="producto.nombre">
-                                        </td> 
-                                        
-                                        <td>
-                                            <!-- Botón para editar el producto -->
-                                            <a class="btn btn-primary"
-                                                :href="'producto-update.html?id='+ producto.id">Editar</a>
-                                            <!-- Botón para eliminar el producto -->
-                                            <button type="button" class="btn btn-danger"
-                                                v-on:click="eliminar(producto.id)">Eliminar</button>
-                                        </td>
-
-                                        
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                            <button type="button" class="btn btn-success" style="margin-right:5px;" ><a href={% url "create_pelicula" %}>Añadir
-                                nueva pelicula
-                            </a></button> 
-                            <button type="button" class="btn btn-success" ><a href="{% url "serie_crear" %}">Añadir
-                                nueva serie
-                            </a></button>
+            
                         </div>
 {% endblock%}

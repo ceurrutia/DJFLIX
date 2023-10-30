@@ -3,12 +3,13 @@ from administracion import views
 
 urlpatterns = [
     
-    #path('administracion/', views.administracion, name="administracion"),
-    path('administracion/', views.PeliculasListView.as_view(), name='administracion'),
+    path('administracion/', views.administracion, name="administracion"),
     path('base_admin/', views.base_admin, name = "base_admin"),
-    path('create_pelicula/', views.create_pelicula, name = "create_pelicula"),
+    path('listado_peliculas/', views.listado_peliculas, name='listado_peliculas'),
+    path('create_pelicula/', views.pelicula_crear, name = "create_pelicula"),
+    path('pelicula/<int:pk>/editar/', views.pelicula_editar, name='pelicula_editar'),
+    path('pelicula/<int:pk>/eliminar/', views.pelicula_eliminar, name='pelicula_eliminar'),
     path('create_categorias/', views.create_categoria, name = "create_categoria"),
-    #path('editar_categoria/<int:categoria_id>/', views.edit_categoria, name='editar_categoria'),
     path('listado_categorias/', views.listado_categorias, name = "listado_categorias"),
     path('serie_lista/', views.serie_lista, name='serie_lista'),
     path('serie_crear/', views.serie_crear, name='serie_crear'),

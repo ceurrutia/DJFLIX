@@ -1,68 +1,99 @@
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseServerError
 from django.urls import reverse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime
 from django.template import Template
-from administracion.forms import FormAltaPelicula
 from administracion.forms import FormAltaCategoria, FormAltaSuscriptor, FormEditCategoria
 from .models import Categorias, Suscriptor, Pelicula, Serie
 from django.contrib import messages
-from django.shortcuts import get_object_or_404
+
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView
-from administracion.forms import SerieForm
+from administracion.forms import SerieForm, PeliculaForm
 
 # Create your views here.
 
+def administracion(request):
+    return render(request, "administracion/index.html" )
+
 #listado y crear peliculas
 
-'''
-Tradicional de Django
 
-def administracion(request):
-    peliculas = Pelicula.objects.all()  # Obtiene todas las pelis desde la base de datos
-    return render(request, "administracion/index.html" , {'peliculas': peliculas})
-'''
+#Tradicional de Django
+
+def listado_peliculas(request):
+    peliculas = Pelicula.objects.all() 
+    return render(request, "administracion/listado_peliculas.html", {'peliculas': peliculas})
+
 #Vista basada en Clase
 
+'''
 class PeliculasListView(ListView):
     
     model = Pelicula
     context_object_name = 'peliculas'
-    template_name = 'administracion/index.html'
+    template_name = 'administracion/listado_peliculas.html'
     ordering = ['id']
+'''
 
 
-
-def create_pelicula(request):
-    context = {}
-    
-    if request.method == "POST":
-        alta_pelicula = FormAltaPelicula(request.POST) #paso request al form
-        if alta_pelicula.is_valid():
-            #Guardo en a ddbb
-            nombre_pelicula = alta_pelicula.cleaned_data['nombre_pelicula']
-            descripcion_pelicula = alta_pelicula.cleaned_data['descripcion_pelicula']
-            categoria_pelicula = alta_pelicula.cleaned_data['categoria_pelicula']
-            portada_pelicula = alta_pelicula.cleaned_data['portada_pelicula']
-            enlace_pelicula = alta_pelicula.cleaned_data['enlace_pelicula']
-            
-            # Creo instancia de Pelicula y guardar
-            nueva_pelicula = Pelicula(nombre_pelicula=nombre_pelicula, descripcion_pelicula=descripcion_pelicula, categoria_pelicula=categoria_pelicula, portada_pelicula=portada_pelicula ,  enlace_pelicula= enlace_pelicula)
-            nueva_pelicula.save()
-            
-            messages.success(request, "Se ha creado una pelicula nueva")
-            
-        else:
-#            return redirect('administracion/create_pelicula.html')
-            return redirect('administracion/create_pelicula.html')
-          
+def pelicula_crear(request):
+    if request.method == 'POST':
+        form = PeliculaForm(request.POST)
+        if form.is_valid():
+            p1 = Pelicula(
+                nombre=form.cleaned_data.get('nombre'),
+                descripcion=form.cleaned_data.get('descripcion'),
+                categoria=get_object_or_404(Categorias, id=form.cleaned_data.get('categoria')),
+                portada=form.cleaned_data.get('portada'),
+                enlace=form.cleaned_data.get('enlace'),
+            )
+            p1.save()
+            return redirect('listado_peliculas')
     else:
-        alta_pelicula = FormAltaPelicula()
-    
-    context['form_alta_pelicula'] = alta_pelicula
-    
-#    return render(request, 'administracion/create_pelicula.html', context)
-    return render(request, 'administracion/create_pelicula.html', context)
+        form = PeliculaForm()
+    return render(request, 'administracion/create_pelicula.html', {'form': form})
+
+
+def pelicula_editar(request, pk):
+    pelicula = Pelicula.objects.get(id=pk)
+    if request.method == 'POST':
+        form =PeliculaForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            pelicula.nombre =data['nombre']
+            pelicula.descripcion = data['descripcion']
+            pelicula.categoria = Categorias.objects.get(id=data['categoria'])
+            pelicula.portada = data['portada']
+            pelicula.enlace = data['enlace']
+            
+ 
+
+            Pelicula.save()
+            return redirect('listado_peliculas')
+    else:
+        form = PeliculaForm(initial={
+            'nombre': Pelicula.nombre, 
+            'descripcion': Pelicula.descripcion, 
+            'portada': Pelicula.portada, 
+            'enlace': Pelicula.enlace,
+            })
+    return render(request, 'administracion/create_pelicula.html', {'form': form})
+
+def pelicula_eliminar(request,pk):
+    form = Pelicula.objects.get(id=pk)
+    if request.method == 'POST':
+        form.delete()
+        return redirect('listado_peliculas')
+    else:
+        form = PeliculaForm(initial={
+            'nombre': form.nombre, 
+            'descripcion': form.descripcion, 
+ #           'categoria': form.categoria,
+            'portada': form.portada, 
+            'enlace': form.enlace, 
+  
+            })
+    return render(request, 'administracion/eliminar_pelicula.html', {'form': form})
 
 
 
