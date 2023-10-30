@@ -37,10 +37,12 @@
                                         <td>
                                            
                                             <!-- Botón para editar serie -->
-                                            <a class="btn btn-primary"
-                                               >Editar</a>
+                                            <a class="btn btn-primary" 
+                                            href="/serie/{{ serie.id }}/editar/"
+                                            >Editar</a>
                                             <!-- Botón para eliminar serie -->
-                                            <button type="button" class="btn btn-danger"
+                                            <a type="button" class="btn btn-danger"
+                                            href="/serie/{{ serie.id }}/eliminar/"
                                                 >Eliminar</button>
                                                 
                                         </td>
