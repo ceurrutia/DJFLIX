@@ -12,6 +12,8 @@ urlpatterns = [
     path('listado_categorias/', views.listado_categorias, name = "listado_categorias"),
     path('serie_lista/', views.serie_lista, name='serie_lista'),
     path('serie_crear/', views.serie_crear, name='serie_crear'),
+    path('serie/<int:pk>/editar/', views.serie_editar, name='serie_editar'),
+    path('serie/<int:pk>/eliminar/', views.serie_eliminar, name='serie_eliminar'),
     path('listado_suscriptores/', views.listado_suscriptores, name = "listado_suscriptores"),
     path('alta_suscriptor/', views.create_suscriptor, name = "alta_suscriptor"),
    

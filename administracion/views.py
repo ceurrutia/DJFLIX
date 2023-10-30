@@ -103,7 +103,6 @@ def serie_lista(request):
     series = Serie.objects.all() 
     return render(request, "administracion/serie_lista.html", {'serie': series})
 
-
 def serie_crear(request):
     if request.method == 'POST':
         form = SerieForm(request.POST)
@@ -121,6 +120,48 @@ def serie_crear(request):
     else:
         form = SerieForm()
     return render(request, 'administracion/serie_crear.html', {'form': form})
+
+def serie_editar(request, pk):
+    serie = Serie.objects.get(id=pk)
+    if request.method == 'POST':
+        form = SerieForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            serie.nombre =data['nombre']
+            serie.descripcion = data['descripcion']
+#            serie.categoria =  Categorias.objects.get(id=data['categoria']),
+            serie.portada = data['portada']
+            serie.enlace = data['enlace']
+ #           serie.cant_capitulos=data['cant_capitulos']
+
+            serie.save()
+            return redirect('serie_lista')
+    else:
+        form = SerieForm(initial={
+            'nombre': serie.nombre, 
+            'descripcion': serie.descripcion, 
+ #           'categoria': serie.categoria,
+            'portada': serie.portada, 
+            'enlace': serie.enlace, 
+  #          'cant_capitulos': serie.cant_capitulos
+            })
+    return render(request, 'administracion/serie_crear.html', {'form': form})
+
+def serie_eliminar(request,pk):
+    form = Serie.objects.get(id=pk)
+    if request.method == 'POST':
+        form.delete()
+        return redirect('serie_lista')
+    else:
+        form = SerieForm(initial={
+            'nombre': form.nombre, 
+            'descripcion': form.descripcion, 
+ #           'categoria': form.categoria,
+            'portada': form.portada, 
+            'enlace': form.enlace, 
+  #          'cant_capitulos': form.cant_capitulos
+            })
+    return render(request, 'administracion/serie_eliminar.html', {'form': form})
 
 #suscriptores
 
