@@ -60,22 +60,20 @@ def pelicula_editar(request, pk):
         form =PeliculaForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
-            pelicula.nombre =data['nombre']
+            pelicula.nombre = data['nombre']
             pelicula.descripcion = data['descripcion']
-            pelicula.categoria = Categorias.objects.get(id=data['categoria'])
+            #pelicula.categoria =  Categorias.objects.get(id=data['categoria']),
             pelicula.portada = data['portada']
             pelicula.enlace = data['enlace']
-            
- 
 
-            Pelicula.save()
+            pelicula.save()
             return redirect('listado_peliculas')
     else:
         form = PeliculaForm(initial={
-            'nombre': Pelicula.nombre, 
-            'descripcion': Pelicula.descripcion, 
-            'portada': Pelicula.portada, 
-            'enlace': Pelicula.enlace,
+            'nombre': pelicula.nombre, 
+            'descripcion': pelicula.descripcion, 
+            'portada': pelicula.portada, 
+            'enlace': pelicula.enlace,
             })
     return render(request, 'administracion/create_pelicula.html', {'form': form})
 

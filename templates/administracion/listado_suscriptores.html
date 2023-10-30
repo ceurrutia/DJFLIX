@@ -38,13 +38,16 @@
                                         
                                         
                                         <td>
-                                            <!-- Botón para editar el producto -->
-                                            <a class="btn btn-primary"
-                                                :href="'producto-update.html?id='+ producto.id">Editar</a>
-                                            <!-- Botón para eliminar el producto -->
-                                            <button type="button" class="btn btn-danger"
-                                                v-on:click="eliminar(producto.id)">Eliminar</button>
-                                        </td>
+                                            <!-- Botón para editar peli -->
+                                            <a class="btn btn-primary" 
+                                            href="/suscriptor/{{ suscriptor.id }}/editar/"
+                                            >Editar</a>
+                                            <!-- Botón para eliminar peli -->
+                                            <a type="button" class="btn btn-danger"
+                                            href="/suscriptor/{{ suscriptor.id }}/eliminar/"
+                                                >Eliminar</button>
+                                         </td>
+ 
 
                                         
                                     </tr>
