@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime
 from django.template import Template
-from administracion.forms import FormAltaCategoria, FormAltaSuscriptor, FormEditCategoria
+from administracion.forms import FormAltaCategoria, SuscriptorForm, FormEditCategoria
 from .models import Categorias, Suscriptor, Pelicula, Serie
 from django.contrib import messages
 
@@ -203,7 +203,7 @@ def create_suscriptor(request):
     context = {}
 
     if request.method == "POST":
-        alta_suscriptor = FormAltaSuscriptor(request.POST)  # Paso request.POST al form
+        alta_suscriptor = SuscriptorForm(request.POST)  # Paso request.POST al form
         if alta_suscriptor.is_valid():
             # Guardo datos del formulario en la ddbb
             nombreApellido = alta_suscriptor.cleaned_data['nombreApellido']
@@ -220,8 +220,49 @@ def create_suscriptor(request):
             # Errores en el formulario
             context['form_errors'] = alta_suscriptor.errors
     else:
-        alta_suscriptor = FormAltaSuscriptor()
+        alta_suscriptor = SuscriptorForm()
     
     context['form_alta_suscriptor'] = alta_suscriptor
     
     return render(request, 'alta_suscriptor.html', context)
+
+
+def suscriptor_editar(request, pk):
+    suscriptor = Suscriptor.objects.get(id=pk)
+    if request.method == 'POST':
+        form =SuscriptorForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            suscriptor.nombre_apellido = data['nombre_apellido']
+            suscriptor.dni = data['dni']
+            suscriptor.email = data['email']
+            suscriptor.fecha_inicio = data['fecha_inicio']
+            suscriptor.baja = data['baja']
+
+            suscriptor.save()
+            return redirect('listado_suscriptores')
+    else:
+        form = SuscriptorForm(initial={
+            'nombreApellido': suscriptor.nombre_apellido, 
+            'dni': suscriptor.dni, 
+            'email': suscriptor.email,
+            'fecha_inicio' : suscriptor.fecha_inicio,
+            'baja': suscriptor.baja 
+            })
+    return render(request, 'administracion/listado_suscriptores.html', {'form': form})
+
+def suscriptor_eliminar(request,pk):
+    form = Suscriptor.objects.get(id=pk)
+    if request.method == 'POST':
+        form.delete()
+        return redirect('listado_suscriptores')
+    else:
+        form = PeliculaForm(initial={
+            'nombre': form.nombre_apellido, 
+            'dni': form.dni, 
+            'email': form.email,  
+            'fecha_inicio' : form.fecha_inicio,
+            'baja': form.baja
+  
+            })
+    return render(request, 'administracion/suscriptor_eliminar.html', {'form': form})

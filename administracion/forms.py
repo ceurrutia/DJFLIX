@@ -44,7 +44,7 @@ class FormEditCategoria(forms.Form):
 
 
 
-class FormAltaSuscriptor(forms.Form):
+class SuscriptorForm(forms.Form):
     nombreApellido = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese su nombre completo'}))
     dni = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese su DNI'}))
     email = forms.EmailField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese su mail'}))
