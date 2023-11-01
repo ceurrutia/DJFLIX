@@ -12,9 +12,10 @@
               <p>¿Estás seguro de que deseas eliminar este suscriptor?</p>
                     <form method="post">
                     {% csrf_token %}
-                    <input type="submit" value="Confirmar eliminacion">
+                    <input type="submit" class="btn btn-danger" value="Confirmar eliminacion">
                 </form>
-                <a href="{% url 'listado_suscriptores' %}">Volver a la lista</a>
+                <button type="button" class="btn btn-primary"> <a href="{% url 'listado_suscriptores' %}">Volver a la lista</a></buton>
+                
             </div>
           </div>
         </div>

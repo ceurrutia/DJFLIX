@@ -30,12 +30,17 @@ class Persona(models.Model):
 class Suscriptor(Persona):
     fecha_inicio = models.DateField(verbose_name="Fecha de Inicio")
     baja = models.DateField(verbose_name="baja", null=True)
+    
+    class Meta:
+        verbose_name_plural = 'Suscriptores'
+        
 
 class Categorias(models.Model):
     nombre_categoria = models.CharField(verbose_name="Nombre categoria", max_length=100)
     
     def __str__(self) -> str:
         return f'{self.nombre_categoria} '
+ 
 
 class Video (models.Model):
     nombre= models.CharField(verbose_name="Nombre", max_length=200)

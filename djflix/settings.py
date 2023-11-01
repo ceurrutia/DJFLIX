@@ -35,6 +35,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -43,7 +44,8 @@ INSTALLED_APPS = [
     'portal',
     'peliculas',
     'django_extensions',
-    'administracion'
+    'administracion',
+    
 ]
 
 MIDDLEWARE = [
@@ -129,8 +131,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static"
-    
-]
+    ]
 
 
 
