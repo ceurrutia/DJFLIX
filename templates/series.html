@@ -63,9 +63,10 @@
   <div class="card w-25" style="text-align:Left;">
     <div  style="text-align: left">
       <h5 class="card-title">{{ serie.nombre | upper }}</h5>
-      <p class="card-text"><img class="pelis-zoom" src="{{ serie.portada }}" width="200"></p>
+      <p class="card-text"><img class="pelis-zoom" src="{{ serie.portada.url }}" width="200"></p>
       <p class="card-text"><strong> Categoría: </strong>{{ serie.categoria }}</p>
       <p class="card-text"><strong> Descripción: </strong>{{ serie.descripcion }}</p>
+      
  
 
 

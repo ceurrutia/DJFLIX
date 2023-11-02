@@ -46,8 +46,8 @@ class Video (models.Model):
     nombre= models.CharField(verbose_name="Nombre", max_length=200)
     descripcion = models.TextField(verbose_name="Descripcion", max_length=500)
     categoria = models.ForeignKey(Categorias, on_delete=models.CASCADE)
-    portada = models.ImageField(upload_to='imagenes/', null=True, verbose_name="Portada")
-    enlace = models.TextField(verbose_name="Enlace", max_length=500)
+    portada = models.ImageField(upload_to="peliculas/", null=True, verbose_name="Portada")
+    enlace = models.URLField(verbose_name="Enlace", max_length=500)
     baja = models.DateField(verbose_name="baja", null=True)
 
     class Meta:

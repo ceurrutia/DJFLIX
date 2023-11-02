@@ -68,7 +68,7 @@
         <div class="card w-25" style="text-align:Left;">
           <div class="card-body">
             <h5 class="card-title">{{ pelicula.nombre | upper }}</h5>
-            <p class="card-text"><img class="pelis-zoom" src="{{ pelicula.portada }}" width="200"></p>
+            <p class="card-text"><img class="pelis-zoom" src="{{ pelicula.portada.url }}" width="200"></p>
             <p class="card-text"><strong> Categoría: </strong>{{ pelicula.categoria }}</p>
             <p class="card-text"><strong> Descripción: </strong>{{ pelicula.descripcion }}</p>
             
