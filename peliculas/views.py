@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.shortcuts import render
 from datetime import datetime
 from django.template import Template
-from administracion.models import Pelicula, Serie
+from administracion.models import Pelicula, Serie, Video
 # Create your views here.
 
 
@@ -21,7 +21,6 @@ def peliculas(request):
 
 def detallepelicula(request):
     return render(request, "detallepelicula.html")
-    
     
 def archivo(request, year):
     if year == 2028:

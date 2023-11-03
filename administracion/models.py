@@ -45,9 +45,15 @@ class Categorias(models.Model):
 class Video (models.Model):
     nombre= models.CharField(verbose_name="Nombre", max_length=200)
     descripcion = models.TextField(verbose_name="Descripcion", max_length=500)
+<<<<<<< HEAD
 #    categoria = models.ForeignKey(Categorias, on_delete=models.CASCADE)
     portada = models.ImageField(upload_to='imagenes/', null=True, verbose_name="Portada")
     enlace = models.TextField(verbose_name="Enlace", max_length=500)
+=======
+    categoria = models.ForeignKey(Categorias, on_delete=models.CASCADE)
+    portada = models.ImageField(upload_to="peliculas/", null=True, verbose_name="Portada")
+    enlace = models.URLField(verbose_name="Enlace", max_length=500)
+>>>>>>> fd0160b32ed2aacdb337924905747da61e6c957e
     baja = models.DateField(verbose_name="baja", null=True)
     categoria=models.ManyToManyField(Categorias)
 
