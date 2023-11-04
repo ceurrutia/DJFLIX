@@ -128,6 +128,43 @@ def create_categoria(request):
     
     return render(request, 'administracion/create_categoria.html', context)
 
+def categoria_editar(request, pk):
+    categoria = Categorias.objects.get(id=pk)
+    if request.method == 'POST':
+        form = FormAltaCategoria(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            categoria.nombre_categoria =data['nombre_categoria']
+            categoria.save()
+            return redirect('listado_categorias')
+    else:
+        form = FormAltaCategoria(initial={
+            'nombre_categoria': categoria.nombre_categoria, 
+            
+            })
+    return render(request, 'administracion/create_categoria.html', {'form': form})
+
+
+
+def categoria_eliminar(request,pk):
+    form = Categorias.objects.get(id=pk)
+    if request.method == 'POST':
+        form.delete()
+        return redirect('listado_categorias')
+    else:
+        form = FormAltaCategoria(initial={
+            'nombre': form.nombre_categoria, 
+
+            })
+    return render(request, 'administracion/eliminar_categoria.html', {'form': form})
+
+
+#series
+
+
+
+
+
 def serie_lista(request):
     series = Serie.objects.all() 
     return render(request, "administracion/serie_lista.html", {'serie': series})
@@ -206,13 +243,13 @@ def create_suscriptor(request):
         alta_suscriptor = SuscriptorForm(request.POST)  # Paso request.POST al form
         if alta_suscriptor.is_valid():
             # Guardo datos del formulario en la ddbb
-            nombreApellido = alta_suscriptor.cleaned_data['nombreApellido']
+            nombre_apellido = alta_suscriptor.cleaned_data['nombreApellido']
             dni = alta_suscriptor.cleaned_data['dni']
             email = alta_suscriptor.cleaned_data['email']
             fecha_inicio = alta_suscriptor.cleaned_data['fecha_inicio']
             
             # Creo una instancia de Suscriptor
-            nuevo_suscriptor = Suscriptor(nombre_apellido=nombreApellido, dni=dni, email=email, fecha_inicio=fecha_inicio)
+            nuevo_suscriptor = Suscriptor(nombre_apellido=nombre_apellido, dni=dni, email=email, fecha_inicio=fecha_inicio)
             nuevo_suscriptor.save()
             return render(request, 'alta_suscriptor.html')           
            
@@ -232,15 +269,15 @@ def suscriptor_editar(request, pk):
     if request.method == 'POST':
         form =SuscriptorForm(request.POST)
         if form.is_valid():
-            data = form.cleaned_data
-            suscriptor.nombre_apellido = data['nombre_apellido']
-            suscriptor.dni = data['dni']
-            suscriptor.email = data['email']
-            suscriptor.fecha_inicio = data['fecha_inicio']
-            suscriptor.baja = data['baja']
-
-            suscriptor.save()
-            return redirect('listado_suscriptores')
+             if form.is_valid():
+                data = form.cleaned_data
+                suscriptor.nombre_apellido =data['nombreApellido']
+                suscriptor.dni = data['dni']
+                suscriptor.email = data['email']
+                suscriptor.fecha_inicio = data['fecha_inicio']
+ 
+                suscriptor.save()
+                return redirect('listado_suscriptores')
     else:
         form = SuscriptorForm(initial={
             'nombreApellido': suscriptor.nombre_apellido, 
@@ -249,7 +286,7 @@ def suscriptor_editar(request, pk):
             'fecha_inicio' : suscriptor.fecha_inicio,
             'baja': suscriptor.baja 
             })
-    return render(request, 'administracion/listado_suscriptores.html', {'form': form})
+    return render(request, 'administracion/suscriptor_crear.html', {'form': form})
 
 def suscriptor_eliminar(request,pk):
     form = Suscriptor.objects.get(id=pk)

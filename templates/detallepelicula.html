@@ -8,9 +8,13 @@
     <div id="about" class="about-area area-padding" style="background-color: #000;color:white; height: auto;">
       <div class="container">
         <div class="row" >
+          {% for pelicula in peliculas %}
           <h2>Estas viendo ahora el trailer de: {{ pelicula.nombre }}</h2>
           <iframe width="100%" height="650" src={{ pelicula.enlace }} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-          
+         
+          {% empty %}
+          <h3 style="color: white;"> No disponible en este momento </h3>  
+        {% endfor %}
           
         </div>
       </div> 
