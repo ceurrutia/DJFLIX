@@ -109,22 +109,22 @@ def create_categoria(request):
     context = {}
     
     if request.method == "POST":
-        alta_categoria = FormAltaCategoria(request.POST) 
-        if alta_categoria.is_valid():
+        form = FormAltaCategoria(request.POST) 
+        if form.is_valid():
             # Guardamos datos en la ddbb
-            nombre_categoria = alta_categoria.cleaned_data['nombre_categoria']
+            nombre_categoria = form.cleaned_data['nombre_categoria']
             nueva_categoria = Categorias(nombre_categoria=nombre_categoria)
             nueva_categoria.save()
             
-            # Procesar el formulario si la edad es válida
-            
+            # Procesar el formulario si categoria es válida
+            return redirect('listado_categorias')
         else:
             # Error en el formulario
-            context['form_errors'] = alta_categoria.errors
+            context['form_errors'] = form.errors
     else:
-        alta_categoria = FormAltaCategoria()
+        form = FormAltaCategoria()
     
-    context['form_alta_categoria'] = alta_categoria
+    context['form'] = form
     
     return render(request, 'administracion/create_categoria.html', context)
 
