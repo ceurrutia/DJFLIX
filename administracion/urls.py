@@ -11,10 +11,10 @@ urlpatterns = [
     path('pelicula/<int:pk>/editar/', views.pelicula_editar, name='pelicula_editar'),
     path('pelicula/<int:pk>/eliminar/', views.pelicula_eliminar, name='pelicula_eliminar'),
     
-    path('create_categoria/', views.create_categoria, name = "create_categoria"),
-    path('listado_categorias/', views.listado_categorias, name = "listado_categorias"),
-    path('categoria/<int:pk>/editar/', views.categoria_editar, name='categoria_editar'),
-    path('categoria/<int:pk>/eliminar/', views.categoria_eliminar, name='categoria_eliminar'),
+    path('create_categoria/', views.CategoriasCreateView.as_view(), name = "create_categoria"),
+    path('categorias/', views.CategoriasListView.as_view(), name='listado_categorias'),
+    path('categoria/<int:pk>/editar/', views.CategoriaUpdateView.as_view(), name='categoria_editar'),
+    path('categoria/<int:pk>/eliminar/', views.CategoriasDeleteView.as_view(), name='categoria_eliminar'),
     
     path('serie_lista/', views.serie_lista, name='serie_lista'),
     path('serie_crear/', views.serie_crear, name='serie_crear'),

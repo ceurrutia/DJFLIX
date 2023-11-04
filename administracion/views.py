@@ -1,4 +1,4 @@
-from django.http import HttpResponse, HttpResponseRedirect, HttpResponseServerError
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseServerError, HttpRequest
 from django.urls import reverse
 from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime
@@ -6,6 +6,8 @@ from django.template import Template
 from administracion.forms import FormAltaCategoria, SuscriptorForm, FormEditCategoria
 from .models import Categorias, Suscriptor, Pelicula, Serie
 from django.contrib import messages
+from django.urls import reverse_lazy
+from typing import Any
 
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 from administracion.forms import SerieForm, PeliculaForm
@@ -26,15 +28,42 @@ def listado_peliculas(request):
 
 #Vista basada en Clase
 
-'''
-class PeliculasListView(ListView):
-    
-    model = Pelicula
-    context_object_name = 'peliculas'
-    template_name = 'administracion/listado_peliculas.html'
-    ordering = ['id']
-'''
+class CategoriasListView(ListView):
+    model = Categorias
+    context_object_name = 'categorias'
+    template_name = 'administracion/listado_categorias.html'
+    ordering = ['nombre_categoria']
 
+    def get(self, request: HttpRequest, *args: Any, **kwargs: Any):
+        if 'nombre_categoria' in request.GET:
+            self.queryset = self.queryset.filter(nombre_categoria__contains=request.GET['nombre_categoria'])
+
+        return super().get(request, *args, **kwargs)
+
+
+class CategoriasCreateView(CreateView):
+    model = Categorias
+    fields = ['nombre_categoria']
+    #form_class = FormAltaCategoria
+    template_name = 'administracion/create_categoria.html'
+    success_url = reverse_lazy('listado_categorias')
+
+
+class CategoriaUpdateView(UpdateView):
+    model = Categorias
+    fields = ['nombre_categoria']
+    #form_class = FormAltaCategoria
+    template_name = 'administracion/create_categoria.html'
+    success_url = reverse_lazy('listado_categorias')
+
+
+class CategoriasDeleteView(DeleteView):
+    model = Categorias
+    template_name = 'administracion/eliminar_categoria.html'
+    success_url = reverse_lazy('listado_categorias')
+
+
+#Peliculas
 
 def pelicula_crear(request):
     if request.method == 'POST':
@@ -86,7 +115,7 @@ def pelicula_eliminar(request,pk):
         form = PeliculaForm(initial={
             'nombre': form.nombre, 
             'descripcion': form.descripcion, 
- #           'categoria': form.categoria,
+             #'categoria': form.categoria,
             'portada': form.portada, 
             'enlace': form.enlace, 
   
@@ -98,6 +127,8 @@ def pelicula_eliminar(request,pk):
 def base_admin(request):
     return render(request, "administracion/base_admin.html")
 
+'''
+#Categorias al old school django, funciona ok
 
 def listado_categorias(request):
     categorias = Categorias.objects.all()  # Obtiene todas las categorías desde la base de datos
@@ -157,13 +188,9 @@ def categoria_eliminar(request,pk):
 
             })
     return render(request, 'administracion/eliminar_categoria.html', {'form': form})
-
+'''
 
 #series
-
-
-
-
 
 def serie_lista(request):
     series = Serie.objects.all() 
@@ -206,10 +233,10 @@ def serie_editar(request, pk):
         form = SerieForm(initial={
             'nombre': serie.nombre, 
             'descripcion': serie.descripcion, 
- #           'categoria': serie.categoria,
+             #'categoria': serie.categoria,
             'portada': serie.portada, 
             'enlace': serie.enlace, 
-  #          'cant_capitulos': serie.cant_capitulos
+             #'cant_capitulos': serie.cant_capitulos
             })
     return render(request, 'administracion/serie_crear.html', {'form': form})
 
@@ -222,10 +249,10 @@ def serie_eliminar(request,pk):
         form = SerieForm(initial={
             'nombre': form.nombre, 
             'descripcion': form.descripcion, 
- #           'categoria': form.categoria,
+             #'categoria': form.categoria,
             'portada': form.portada, 
             'enlace': form.enlace, 
-  #          'cant_capitulos': form.cant_capitulos
+            #'cant_capitulos': form.cant_capitulos
             })
     return render(request, 'administracion/serie_eliminar.html', {'form': form})
 
