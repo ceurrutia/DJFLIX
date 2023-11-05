@@ -203,7 +203,8 @@ def serie_crear(request):
             s1= Serie(
                 nombre =form.cleaned_data.get('nombre'),
                 descripcion = form.cleaned_data.get('descripcion'),
-                categoria =  Categorias.objects.get(id=form.cleaned_data.get('categoria')),
+#                categoria =  Categorias.objects.get(id=form.cleaned_data.get('categoria')),
+                categoria =  form.cleaned_data.get('categoria'),
                 portada = form.cleaned_data.get('portada'),
                 enlace = form.cleaned_data.get('enlace'),
                 cant_capitulos=0
@@ -220,12 +221,16 @@ def serie_editar(request, pk):
         form = SerieForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
+            # try:
+            #     categ=Categorias.objects.get(pk=data['categoria'])
+            # except Categorias.DoesNotExist:
+            #     return render(request, 'administracion/404_admin.html')
             serie.nombre =data['nombre']
             serie.descripcion = data['descripcion']
-#            serie.categoria =  Categorias.objects.get(id=data['categoria']),
+            serie.categoria =  data['categoria']
             serie.portada = data['portada']
             serie.enlace = data['enlace']
- #           serie.cant_capitulos=data['cant_capitulos']
+            serie.cant_capitulos=data['cant_capitulos']
 
             serie.save()
             return redirect('serie_lista')
@@ -233,10 +238,10 @@ def serie_editar(request, pk):
         form = SerieForm(initial={
             'nombre': serie.nombre, 
             'descripcion': serie.descripcion, 
-             #'categoria': serie.categoria,
+            'categoria': serie.categoria,
             'portada': serie.portada, 
             'enlace': serie.enlace, 
-             #'cant_capitulos': serie.cant_capitulos
+            'cant_capitulos': serie.cant_capitulos
             })
     return render(request, 'administracion/serie_crear.html', {'form': form})
 
@@ -249,10 +254,10 @@ def serie_eliminar(request,pk):
         form = SerieForm(initial={
             'nombre': form.nombre, 
             'descripcion': form.descripcion, 
-             #'categoria': form.categoria,
+            'categoria': form.categoria,
             'portada': form.portada, 
             'enlace': form.enlace, 
-            #'cant_capitulos': form.cant_capitulos
+            'cant_capitulos': form.cant_capitulos
             })
     return render(request, 'administracion/serie_eliminar.html', {'form': form})
 

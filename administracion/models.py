@@ -45,11 +45,10 @@ class Categorias(models.Model):
 class Video (models.Model):
     nombre= models.CharField(verbose_name="Nombre", max_length=200)
     descripcion = models.TextField(verbose_name="Descripcion", max_length=500)
-    categoria = models.ForeignKey(Categorias, on_delete=models.CASCADE)
+    categoria = models.ForeignKey(Categorias, on_delete=models.CASCADE, default=1)
     portada = models.ImageField(upload_to='imagenes/', null=True, verbose_name="Portada")
     enlace = models.TextField(verbose_name="Enlace", max_length=500)
     baja = models.DateField(verbose_name="baja", null=True)
-    categoria=models.ManyToManyField(Categorias)
 
     class Meta:
      abstract = True
