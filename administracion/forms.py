@@ -4,13 +4,9 @@ from django.core.exceptions import ValidationError
 from .models import Categorias, Serie
 
 class PeliculaForm(forms.Form):
-    lista_categorias=[]
-    for categoria in Categorias.objects.all():
-        lista_categorias.append((categoria.id, categoria.nombre_categoria))
-
     nombre = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese nombre de la pelicula'}))
     descripcion = forms.CharField(max_length=500, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Solo texto'}))
-    categoria = forms.ChoiceField(choices=lista_categorias)
+    categoria = forms.ModelChoiceField(queryset=Categorias.objects.all(), empty_label=None)
     portada = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese url de imagen'}))
     enlace = forms.URLField(required = True, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese url de enlace'}))
 

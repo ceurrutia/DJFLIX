@@ -72,7 +72,7 @@ def pelicula_crear(request):
             p1 = Pelicula(
                 nombre=form.cleaned_data.get('nombre'),
                 descripcion=form.cleaned_data.get('descripcion'),
-                categoria=get_object_or_404(Categorias, id=form.cleaned_data.get('categoria')),
+                categoria = form.cleaned_data.get('categoria'),
                 portada=form.cleaned_data.get('portada'),
                 enlace=form.cleaned_data.get('enlace'),
             )
@@ -91,7 +91,7 @@ def pelicula_editar(request, pk):
             data = form.cleaned_data
             pelicula.nombre = data['nombre']
             pelicula.descripcion = data['descripcion']
-            #pelicula.categoria =  Categorias.objects.get(id=data['categoria']),
+            pelicula.categoria =  data['categoria']
             pelicula.portada = data['portada']
             pelicula.enlace = data['enlace']
 
@@ -101,6 +101,7 @@ def pelicula_editar(request, pk):
         form = PeliculaForm(initial={
             'nombre': pelicula.nombre, 
             'descripcion': pelicula.descripcion, 
+            'categoria': pelicula.categoria,
             'portada': pelicula.portada, 
             'enlace': pelicula.enlace,
             })
