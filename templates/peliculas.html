@@ -23,7 +23,7 @@
             <p class="card-text"><strong> Descripción: </strong>{{ pelicula.descripcion }}</p>
             
             
-            <form action = "{% url "detallepelicula" %}">
+            <form action = " {{ pelicula.enlace }} ">
               <button class="btn-get-started scrollto animate__animated animate__fadeInUp">
                   Ver ahora
               </button>
