@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% include 'header_image.html' %}
+
+{% block content%}
+
+
+<!-- ======= Contact Section ======= -->
+<div id="contact" class="contact-area">
+    <div class="contact-inner area-padding">
+      <div class="contact-overly"></div>
+      <div class="container ">
+
+
+        <div class="row">
+          <!-- Start  contact -->
+          <div class="col-md-12">
+  
+            <div class="section-headline text-Left">
+              <h1>Adios Logout </h1>
+              <br>
+  
+              <form method="POST">
+                {% csrf_token %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-success" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <button type="submit" class="btn btn-success">Logout</button>
+            </form>
+            </div>
+          </div>
+        </div>
+      </div><!-- End Contact Section -->
+
+
+{%endblock%}

@@ -8,6 +8,9 @@ from .models import Categorias, Suscriptor, Pelicula, Serie
 from django.contrib import messages
 from django.urls import reverse_lazy
 from typing import Any
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import authenticate, login as auth_login
 
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 from administracion.forms import SerieForm, PeliculaForm
@@ -336,3 +339,31 @@ def suscriptor_eliminar(request,pk):
   
             })
     return render(request, 'administracion/suscriptor_eliminar.html', {'form': form})
+
+#Login usuario
+
+def login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        if username and password:
+            user = authenticate(request, username=username, password=password)
+
+            if user is not None:
+                auth_login(request, user)
+                messages.success(request, f'Bienvenido/a {username}')
+                return redirect('index')  #LLeva a la home del sitio
+            else:
+                messages.error(request, f'Has ingresado un dato erroneo, intenta nuevamente')
+        else:
+            messages.error(request, 'Por favor, ingresa un nombre de usuario y una contraseña válidos.')
+
+    form = AuthenticationForm()
+    return render(request, 'administracion/login.html', {'form': form, 'title': 'Log in'})
+
+
+def logout_view(request):
+    logout(request)
+    messages.success(request, 'Has cerrado sesión correctamente.')
+    return redirect('login')

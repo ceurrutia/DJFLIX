@@ -42,3 +42,5 @@ class SuscriptorForm(forms.Form):
     dni = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese su DNI'}))
     email = forms.EmailField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese su mail'}))
     fecha_inicio=forms.DateField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese fecha de inicio'}))
+    
+ 

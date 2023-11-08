@@ -10,13 +10,18 @@
         <!--<li><a class="nav-link scrollto" href="{% url "detallepelicula" %}">Pelicula single</a></li>-->
         <li><a class="nav-link scrollto" href="{% url "Precios" %}">Precios</a></li>
         <li><a class="nav-link scrollto" href="{% url "Contacto" %}">Contacto</a></li>
-        <li><a class="nav-link scrollto" href="{% url "alta_suscriptor" %}">Registrarse</a></li>
         <li><a class="nav-link scrollto" href="{% url "administracion" %}">Administracion</a></li>
+        <li><a class="nav-link scrollto" href="{% url "alta_suscriptor" %}">Registrarse</a></li>
+        
       </ul>
-      <!-- search option start -->
-      
-      <!-- search option end -->
-      <i class="bi bi-list mobile-nav-toggle"></i>
+    
+      {% if user.is_authenticated %}
+    <p style="display: inline; color: white;">Bienvenido/a, {{ user.username }}</p>
+    <a href="{% url 'logout' %}" class="btn btn-outline-primary me-2">Logout</a>
+{% else %}
+    <a href="{% url 'login' %}" class="btn btn-outline-primary me-2" >Iniciar sesión</a>
+    <a href="{% url 'alta_suscriptor' %}" class="btn btn-outline-primary me-2" >Registrarse</a>
+{% endif %}
     </nav>
 
   </div>

@@ -25,5 +25,8 @@ urlpatterns = [
     path('alta_suscriptor/', views.create_suscriptor, name = "alta_suscriptor"),
     path('suscriptor/<int:pk>/editar/', views.suscriptor_editar, name='suscriptor_editar'),
     path('suscriptor/<int:pk>/eliminar/', views.suscriptor_eliminar, name='suscriptor_eliminar'),
+    
+    path('login/', views.login, name = "login"),
+    path('logout/', views.logout_view, name='logout')
    
 ]

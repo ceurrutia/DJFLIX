@@ -85,23 +85,21 @@
       
       <div class="col-md-6">
         <h1> Inicia sesion</h1>
-        <div class="form contact-form">
+        <form method="POST">
           {% csrf_token %}
-          <form action="" method="post" role="form" class="php-email-form">
-            <div class="form-group mt-3">
-              <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
-            </div>
-            <div class="form-group mt-3">
-              <input type="password" class="form-control" name="password" id="password" placeholder="Contrasena" required>
-            </div>
 
+          {% if messages %}
+          {% for message in messages %}
+          <div class="alert alert-success" role="alert">
+            {{ message }} 
             
-            <div class="my-3">
-              <div class="error_login">No fue posible iniciar sesion. Usuario o contrasena no valido.</div>
-            </div>
-            <div class="text-center"><button type="submit">Inicia sesion</button></div>
-           
-          </form>
+          </div>
+          {% endfor %}
+          {% endif %}
+          
+          {{ form.as_p }}
+          <button type="submit" class="btn btn-success">Iniciar sesion</button>
+      </form>
         </div>
       </div>
       <!-- end login-->
