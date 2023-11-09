@@ -44,7 +44,7 @@
               <div class="container">
                 <h2 class="animate__animated animate__fadeInDown">Peliculas on demand </h2>
                 <p class="animate__animated animate__fadeInUp">DJ Flix Streaming</p>
-                <a href="#about" class="btn-get-started scrollto animate__animated animate__fadeInUp">Inicia sesion</a>
+                <a href="{% url 'login' %}" class="btn-get-started scrollto animate__animated animate__fadeInUp">Inicia sesion</a>
                 <a href="{% url "alta_suscriptor" %}" class="btn-get-started scrollto animate__animated animate__fadeInUp">Registrate</a>
               </div>
             </div>
@@ -76,43 +76,7 @@
 
   <main id="main">
 
-    <!-- start formulario de acceso-->
-    <div id="about" class="about-area area-padding">
-      <div class="container">
-        <div class="row">
-
-    <!-- Start  login-->
-      
-      <div class="col-md-6">
-        <h1> Inicia sesion</h1>
-        <form method="POST">
-          {% csrf_token %}
-
-          {% if messages %}
-          {% for message in messages %}
-          <div class="alert alert-success" role="alert">
-            {{ message }} 
-            
-          </div>
-          {% endfor %}
-          {% endif %}
-          
-          {{ form.as_p }}
-          <button type="submit" class="btn btn-success">Iniciar sesion</button>
-      </form>
-        </div>
-      </div>
-      <!-- end login-->
-      
-          
-        </div>
-
-
-       <!-- End form -->
-       
-      
-    </div>
-  </div>
+ 
      
 
     <div id="about" class="about-area area-padding">

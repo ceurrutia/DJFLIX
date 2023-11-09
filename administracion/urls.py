@@ -27,6 +27,8 @@ urlpatterns = [
     path('suscriptor/<int:pk>/eliminar/', views.suscriptor_eliminar, name='suscriptor_eliminar'),
     
     path('login/', views.login, name = "login"),
-    path('logout/', views.logout_view, name='logout')
+    path('logout/', views.logout_view, name='logout'),
+    path('register/', views.register, name='register'),
+ 
    
 ]

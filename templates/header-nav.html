@@ -5,23 +5,26 @@
   </div>
     <nav id="navbar" class="navbar">
         <li><a class="nav-link scrollto" href="{% url "index" %}">Inicio</a></li>
-        <li><a class="nav-link scrollto" href="{% url "Peliculas" %}">Peliculas</a></li>
+        <!--<li><a class="nav-link scrollto" href="{% url "Peliculas" %}">Peliculas</a></li>
         <li><a class="nav-link scrollto" href="{% url "series" %}">Series</a></li>
-        <!--<li><a class="nav-link scrollto" href="{% url "detallepelicula" %}">Pelicula single</a></li>-->
+        <li><a class="nav-link scrollto" href="{% url "detallepelicula" %}">Pelicula single</a></li>-->
+        <!--<li><a class="nav-link scrollto" href="{% url "alta_suscriptor" %}" style="margin-right: 30px">Reg Suscriptor</a></li>-->
         <li><a class="nav-link scrollto" href="{% url "Precios" %}">Precios</a></li>
         <li><a class="nav-link scrollto" href="{% url "Contacto" %}">Contacto</a></li>
-        <li><a class="nav-link scrollto" href="{% url "administracion" %}">Administracion</a></li>
-        <li><a class="nav-link scrollto" href="{% url "alta_suscriptor" %}">Registrarse</a></li>
-        
       </ul>
     
       {% if user.is_authenticated %}
+      <li><a class="nav-link scrollto" href="{% url "Peliculas" %}">Peliculas</a></li>
+      <li><a class="nav-link scrollto" href="{% url "series" %}">Series</a></li>
+      <li><a class="nav-link scrollto" href="{% url "administracion" %}">Administracion</a></li>
     <p style="display: inline; color: white;">Bienvenido/a, {{ user.username }}</p>
     <a href="{% url 'logout' %}" class="btn btn-outline-primary me-2">Logout</a>
 {% else %}
-    <a href="{% url 'login' %}" class="btn btn-outline-primary me-2" >Iniciar sesión</a>
-    <a href="{% url 'alta_suscriptor' %}" class="btn btn-outline-primary me-2" >Registrarse</a>
+    <a href="{% url 'login' %}" class="btn btn-outline-primary " style="padding-right: 30px;" >Iniciar sesión</a>
+    <a href="{% url 'register' %}" class="btn btn-outline-primary" style="padding-right: 30px;" >Registrar usuario </a>
 {% endif %}
+
+
     </nav>
 
   </div>

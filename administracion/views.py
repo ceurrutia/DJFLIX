@@ -3,20 +3,21 @@ from django.urls import reverse
 from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime
 from django.template import Template
-from administracion.forms import FormAltaCategoria, SuscriptorForm, FormEditCategoria
+from administracion.forms import FormAltaCategoria, SuscriptorForm, FormEditCategoria, registerForm
 from .models import Categorias, Suscriptor, Pelicula, Serie
 from django.contrib import messages
 from django.urls import reverse_lazy
 from typing import Any
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login as auth_login
 
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 from administracion.forms import SerieForm, PeliculaForm
-
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
+@login_required
 def administracion(request):
     return render(request, "administracion/index.html" )
 
@@ -271,7 +272,6 @@ def listado_suscriptores(request):
     suscriptores = Suscriptor.objects.all()  # Obtiene todos los suscribers desde la base de datos
     return render(request, "administracion/listado_suscriptores.html", {'suscriptores': suscriptores})
 
-
 def create_suscriptor(request):
     context = {}
 
@@ -342,6 +342,38 @@ def suscriptor_eliminar(request,pk):
 
 #Login usuario
 
+
+def register(request):
+    contexto = {}
+    if request.method == "POST":
+        form = registerForm(request.POST)  # Paso request.POST al form
+        if form.is_valid():
+            # Guardo datos del formulario en la ddbb
+            nombre_apellido = form.cleaned_data['nombreApellido']
+            dni = form.cleaned_data['dni']
+            email = form.cleaned_data['email']
+            fecha_inicio = form.cleaned_data['fecha_inicio']
+            username = form.cleaned_data['username']
+            password1 = form.cleaned_data['password1']
+            password2 = form.cleaned_data['password2']
+            
+            # Creo una instancia de Suscriptor
+            nuevo_user = Suscriptor(nombre_apellido=nombre_apellido, dni=dni, email=email, fecha_inicio=fecha_inicio, username= username, password1 = password1, password2=password2)
+            nuevo_user.save()
+            return render(request, 'administracion/register.html')           
+           
+        else:
+            # Errores en el formulario
+            contexto['form_errors'] =  form.errors
+    else:
+         form = registerForm()
+    
+    contexto['form'] =  form
+    
+    return render(request, 'administracion/register.html', contexto)
+    
+    
+    
 def login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -352,7 +384,7 @@ def login(request):
 
             if user is not None:
                 auth_login(request, user)
-                messages.success(request, f'Bienvenido/a {username}')
+                messages.success(request, f'Bienvenido/a, {username}')
                 return redirect('index')  #LLeva a la home del sitio
             else:
                 messages.error(request, f'Has ingresado un dato erroneo, intenta nuevamente')
