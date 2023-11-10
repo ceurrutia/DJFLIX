@@ -42,6 +42,9 @@ class SuscriptorForm(forms.Form):
     dni = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese su DNI'}))
     email = forms.EmailField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese su mail'}))
     fecha_inicio=forms.DateField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese fecha de inicio'}))
+    username = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese su nombre de usuario'}))
+    password1 = forms.CharField(max_length=20, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese su password'}))
+    password2 = forms.CharField(max_length=20, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese nuevamente su password'}))
     
     
 class registerForm(SuscriptorForm):

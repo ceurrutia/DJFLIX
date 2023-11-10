@@ -283,11 +283,15 @@ def create_suscriptor(request):
             dni = alta_suscriptor.cleaned_data['dni']
             email = alta_suscriptor.cleaned_data['email']
             fecha_inicio = alta_suscriptor.cleaned_data['fecha_inicio']
+            username = alta_suscriptor.cleaned_data['username']
+            password1 = alta_suscriptor.cleaned_data['password1']
+            password2 = alta_suscriptor.cleaned_data['password2']
             
             # Creo una instancia de Suscriptor
-            nuevo_suscriptor = Suscriptor(nombre_apellido=nombre_apellido, dni=dni, email=email, fecha_inicio=fecha_inicio)
+            nuevo_suscriptor = Suscriptor(nombre_apellido=nombre_apellido, dni=dni, email=email, fecha_inicio=fecha_inicio, username= username, password1=password1, password2=password2)
             nuevo_suscriptor.save()
-            return render(request, 'alta_suscriptor.html')           
+            messages.success(request, 'Gracias!Su registro fue exitoso')
+            return render(request, 'index.html')           
            
         else:
             # Errores en el formulario

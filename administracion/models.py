@@ -30,6 +30,10 @@ class Persona(models.Model):
 class Suscriptor(Persona):
     fecha_inicio = models.DateField(verbose_name="Fecha de Inicio")
     baja = models.DateField(verbose_name="baja", null=True)
+    username = models.CharField(verbose_name="username", null=False, default="suscriptor")
+    password1 = models.CharField(verbose_name="password1", null=False, default=1234)
+    password2 = models.CharField(verbose_name="password2", null=False, default=1234)
+    
     
     class Meta:
         verbose_name_plural = 'Suscriptores'
