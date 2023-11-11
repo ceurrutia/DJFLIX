@@ -34,7 +34,6 @@ class Suscriptor(Persona):
     password1 = models.CharField(verbose_name="password1", null=False, default=1234)
     password2 = models.CharField(verbose_name="password2", null=False, default=1234)
     
-    
     class Meta:
         verbose_name_plural = 'Suscriptores'
         
@@ -44,7 +43,9 @@ class Categorias(models.Model):
     
     def __str__(self) -> str:
         return f'{self.nombre_categoria} '
- 
+    
+    class Meta:
+       verbose_name_plural = "Categorias"
 
 class Video (models.Model):
     nombre= models.CharField(verbose_name="Nombre", max_length=200)
