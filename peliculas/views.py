@@ -5,13 +5,13 @@ from datetime import datetime
 from django.template import Template
 from administracion.models import Pelicula, Serie, Video
 from django.contrib.auth.decorators import login_required, user_passes_test
-from .decorators import group_required
+from .decorators import group_required , group_required_or_staff
 
 
 # Create your views here.
 
 @login_required
-@group_required('suscriptor')
+@group_required_or_staff ('suscriptor')
 def peliculas(request):
     peliculas = Pelicula.objects.all()  # Obtiene todas las películas desde la base de datos
     context = {
@@ -25,7 +25,7 @@ def peliculas(request):
 
 
 @login_required
-@group_required('suscriptor')
+@group_required_or_staff('suscriptor')
 def detallepelicula(request):
     return render(request, "detallepelicula.html")
     
@@ -41,7 +41,7 @@ def archivo(request, year):
 
 
 @login_required
-@group_required('suscriptor')
+@group_required_or_staff('suscriptor')
 def series(request):
     series = Serie.objects.all()  # Obtiene todas las series desde la base de datos
     context = {
