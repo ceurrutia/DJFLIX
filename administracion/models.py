@@ -39,7 +39,7 @@ class Suscriptor(Persona):
         
 
 class Categorias(models.Model):
-    nombre_categoria = models.CharField(verbose_name="Nombre categoria", max_length=100)
+    nombre_categoria = models.CharField(verbose_name="Nombre categoria", max_length=100 , unique=True)
     
     def __str__(self) -> str:
         return f'{self.nombre_categoria} '
