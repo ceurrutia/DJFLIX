@@ -26,4 +26,6 @@ urlpatterns = [
     path('', include("peliculas.urls")),
     path('', include("administracion.urls")),
     path('admin/', admin.site.urls),
+    path('api/', include("api_djlix.urls")),
+    
 ] + static(MEDIA_URL, document_root = MEDIA_ROOT)

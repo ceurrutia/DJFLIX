@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'peliculas',
     'django_extensions',
     'administracion',
+    'rest_framework'
     
 ]
 

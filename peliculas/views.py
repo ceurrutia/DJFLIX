@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def peliculas(request):
-    peliculas = Pelicula.objects.all()  # Obtiene todas las películas desde la base de datos
+    peliculas = Pelicula.objects.all()  #Trae todas las películas desde la base de datos
     context = {
         'peliculas': peliculas, 
         'es_suscriptor': True,
@@ -29,6 +29,8 @@ def archivo(request, year):
         return HttpResponseRedirect(url)
     elif year == 2027:
         return HttpResponseServerError("<h1> Error de servidor </h1>")
+    elif year == 2024:
+        return HttpResponseServerError("<h1> Quisi mamaaaaaa. Cortaste toda la loz </h1>")
     
     return HttpResponse(f'<h1>Peliculas de archivo del anio: {year}</h1>')
 
@@ -36,7 +38,7 @@ def archivo(request, year):
 
 @login_required
 def series(request):
-    series = Serie.objects.all()  # Obtiene todas las series desde la base de datos
+    series = Serie.objects.all()  #Trae todas las series desde la base de datos
     context = {
         'series': series, 
         'es_suscriptor': True,
