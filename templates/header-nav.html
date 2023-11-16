@@ -12,12 +12,15 @@
         <li><a class="nav-link scrollto" href="{% url "Precios" %}">Precios</a></li>
         <li><a class="nav-link scrollto" href="{% url "Contacto" %}">Contacto</a></li>
       </ul>
-    
-      {% if user.is_authenticated %}
-      <li><a class="nav-link scrollto" href="{% url "Peliculas" %}">Peliculas</a></li>
-      <li><a class="nav-link scrollto" href="{% url "series" %}">Series</a></li>
-      <li><a class="nav-link scrollto" href="{% url "administracion" %}">Administracion</a></li>
-    <p style="display: inline; color: white;">Bienvenido/a, {{ user.username }}</p>
+      
+{% if user.is_authenticated %}
+  <li><a class="nav-link scrollto" href="{% url "Peliculas" %}">Peliculas</a></li>
+  <li><a class="nav-link scrollto" href="{% url "series" %}">Series</a></li>
+  {% if user.is_staff %}
+    <li><a class="nav-link scrollto" href="{% url "administracion" %}">Administracion</a></li>
+    <li><a class="nav-link scrollto" href="{% url "admin:index" %}">Admin Django</a></li>
+  {% endif %}
+    <p style="display: inline; color: white;">Bienvenido/a, <b><u>{{ user.username }}</u></b></p>
     <a href="{% url 'logout' %}" class="btn btn-outline-primary me-2">Logout</a>
 {% else %}
     <a href="{% url 'login' %}" class="btn btn-outline-primary " style="padding-right: 30px;" >Iniciar sesión</a>

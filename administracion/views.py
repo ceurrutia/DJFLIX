@@ -11,6 +11,8 @@ from typing import Any
 from django.contrib.auth import authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login as auth_login
+from django.contrib.auth.models import User, Group
+
 
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 from administracion.forms import SerieForm, PeliculaForm
@@ -290,6 +292,11 @@ def create_suscriptor(request):
             # Creo una instancia de Suscriptor
             nuevo_suscriptor = Suscriptor(nombre_apellido=nombre_apellido, dni=dni, email=email, fecha_inicio=fecha_inicio, username= username, password1=password1, password2=password2)
             nuevo_suscriptor.save()
+            #crea el suscriptor como user y lo asigna al grupo
+            nuevo_usuario = User.objects.create_user(username=username, password=password1)
+            grupo, creado = Group.objects.get_or_create(name='suscriptor')
+            grupo.user_set.add(nuevo_usuario)
+
             messages.success(request, 'Gracias!Su registro fue exitoso')
             return render(request, 'index.html')           
            

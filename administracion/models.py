@@ -34,17 +34,18 @@ class Suscriptor(Persona):
     password1 = models.CharField(verbose_name="password1", null=False, default=1234)
     password2 = models.CharField(verbose_name="password2", null=False, default=1234)
     
-    
     class Meta:
         verbose_name_plural = 'Suscriptores'
         
 
 class Categorias(models.Model):
-    nombre_categoria = models.CharField(verbose_name="Nombre categoria", max_length=100)
+    nombre_categoria = models.CharField(verbose_name="Nombre categoria", max_length=100 , unique=True)
     
     def __str__(self) -> str:
         return f'{self.nombre_categoria} '
- 
+    
+    class Meta:
+       verbose_name_plural = "Categorias"
 
 class Video (models.Model):
     nombre= models.CharField(verbose_name="Nombre", max_length=200)
@@ -89,6 +90,13 @@ class Visualizaciones_pelicula(Visualizaciones):
     suscriptor=models.ForeignKey(Suscriptor, on_delete=models.CASCADE)
     pelicula=models.ForeignKey(Pelicula, on_delete=models.CASCADE)
 
+    def __str__(self) -> str:
+        return f'{self.pelicula.nombre} - {self.suscriptor.username} ({self.suscriptor.nombre_apellido} )-      Fecha:  {self.fecha} durante {self.tiempo_visto} minutos'
+
+
 class Visualizaciones_capitulo(Visualizaciones):
     suscriptor=models.ForeignKey(Suscriptor, on_delete=models.CASCADE)
     capitulo=models.ForeignKey(Capitulo, on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        return f'{self.serie.nombre}  capítulo N° {self.capitulo.numero_capitulo}-    {self.suscriptor.username} ({self.suscriptor.nombre_apellido} )-      Fecha:  {self.fecha} durante {self.tiempo_visto} minutos'
