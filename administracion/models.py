@@ -90,6 +90,13 @@ class Visualizaciones_pelicula(Visualizaciones):
     suscriptor=models.ForeignKey(Suscriptor, on_delete=models.CASCADE)
     pelicula=models.ForeignKey(Pelicula, on_delete=models.CASCADE)
 
+    def __str__(self) -> str:
+        return f'{self.pelicula.nombre} - {self.suscriptor.username} ({self.suscriptor.nombre_apellido} )-      Fecha:  {self.fecha} durante {self.tiempo_visto} minutos'
+
+
 class Visualizaciones_capitulo(Visualizaciones):
     suscriptor=models.ForeignKey(Suscriptor, on_delete=models.CASCADE)
     capitulo=models.ForeignKey(Capitulo, on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        return f'{self.serie.nombre}  capítulo N° {self.capitulo.numero_capitulo}-    {self.suscriptor.username} ({self.suscriptor.nombre_apellido} )-      Fecha:  {self.fecha} durante {self.tiempo_visto} minutos'
