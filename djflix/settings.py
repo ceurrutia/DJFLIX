@@ -88,8 +88,8 @@ WSGI_APPLICATION = 'djflix.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        #'ENGINE': 'django.db.backends.postgresql',
+        #'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql',
         'HOST': config('DATABASE_HOST'),
         'PORT': config('DATABASE_PORT'),
         'NAME': config('DATABASE_NAME'),
