@@ -30,7 +30,7 @@ SECRET_KEY =  config('SECRET_KEY')
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [] #agregar la url del host de pythonanywhere 'https://ceciur.pythonanywhere.com/'
 
 
 # Application definition
@@ -88,9 +88,10 @@ WSGI_APPLICATION = 'djflix.wsgi.application'
 
 DATABASES = {
     'default': {
+        #'ENGINE': 'django.db.backends.mysql',
         'ENGINE': 'django.db.backends.postgresql',
         'HOST': config('DATABASE_HOST'),
-        'PORT': 5432,
+        'PORT': config('DATABASE_PORT'),
         'NAME': config('DATABASE_NAME'),
         'USER': config('DATABASE_USER'),
         'PASSWORD': config('DATABASE_PASSWORD')
@@ -136,6 +137,7 @@ STATICFILES_DIRS = [
     BASE_DIR / "static"
     ]
 
+STATIC_ROOT = BASE_DIR /'static_root'
 
 
 # Default primary key field type
