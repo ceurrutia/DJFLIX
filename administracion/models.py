@@ -100,3 +100,12 @@ class Visualizaciones_capitulo(Visualizaciones):
 
     def __str__(self) -> str:
         return f'{self.serie.nombre}  capítulo N° {self.capitulo.numero_capitulo}-    {self.suscriptor.username} ({self.suscriptor.nombre_apellido} )-      Fecha:  {self.fecha} durante {self.tiempo_visto} minutos'
+
+class Plan (models.Model):
+    nombre_plan = models.CharField(verbose_name="Nombre plan", max_length=100 , unique=True)
+    
+    def __str__(self) -> str:
+        return f'{self.nombre_plan} '
+    
+    class Meta:
+       verbose_name_plural = "Planes"

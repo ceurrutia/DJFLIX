@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.db.models.fields.related import ManyToManyField
 from django.forms.models import ModelMultipleChoiceField
 from django.http.request import HttpRequest
-from administracion.models import Pelicula, Serie,Capitulo,  Suscriptor, Categorias, Visualizaciones_pelicula, Visualizaciones_capitulo
+from administracion.models import Pelicula, Serie,Capitulo,  Suscriptor, Categorias, Visualizaciones_pelicula, Visualizaciones_capitulo, Plan
 
 
 # Register your models here.
@@ -15,6 +15,7 @@ admin.site.register(Visualizaciones_pelicula)
 admin.site.register(Visualizaciones_capitulo)
 #admin.site.register(Suscriptor)
 admin.site.register(Categorias)
+admin.site.register(Plan)
 
 # admin.py
 #Pelicula

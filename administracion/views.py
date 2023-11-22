@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime
 from django.template import Template
-from administracion.forms import FormAltaCategoria, SuscriptorForm, FormEditCategoria, registerForm
+from administracion.forms import FormAltaCategoria, SuscriptorForm, FormEditCategoria, registerForm, PlanForm
 from .models import Categorias, Suscriptor, Pelicula, Serie
 from django.contrib import messages
 from django.urls import reverse_lazy
@@ -133,6 +133,17 @@ def pelicula_eliminar(request,pk):
 
 def base_admin(request):
     return render(request, "administracion/base_admin.html")
+
+def plan_crear(request):
+    if request.method == 'POST':
+        form = PlanForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('administracion')
+    else:
+        form = PlanForm()
+
+    return render(request, 'administracion/plan_crear.html', {'form': form})
 
 '''
 #Categorias al old school django, funciona ok

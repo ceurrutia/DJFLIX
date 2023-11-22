@@ -1,7 +1,7 @@
 import re
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Categorias, Serie
+from .models import Categorias, Serie, Plan
 
 class PeliculaForm(forms.Form):
     nombre = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese nombre de la pelicula'}))
@@ -52,3 +52,8 @@ class registerForm(SuscriptorForm):
     password1 = forms.CharField(max_length=20, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese su password'}))
     password2 = forms.CharField(max_length=20, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese nuevamente su password'}))
     
+
+class PlanForm(forms.ModelForm):
+    class Meta:
+        model = Plan
+        fields = '__all__'
