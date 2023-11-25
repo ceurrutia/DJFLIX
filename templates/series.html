@@ -35,11 +35,9 @@
           {% endfor %}
         </ol>
 
-        <form action = " {{ serie.enlace }} ">
-          <button class="btn-get-started scrollto animate__animated animate__fadeInUp">
-              Ver ahora
-          </button>
-      </form>
+        <a href="{% url 'detalleserie' serie.id %}" class="btn-get-started scrollto animate__animated animate__fadeInUp">
+          Ver ahora
+      </a>
         </table>
 
        

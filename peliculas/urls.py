@@ -23,6 +23,8 @@ urlpatterns = [
     
     path('peliculas/', views.peliculas, name = "Peliculas"),
     path('series/', views.series, name = "series"),
-    path('detallepelicula/', views.detallepelicula, name = "detallepelicula"),
+    #path('detallepelicula/', views.detallepelicula, name = "detallepelicula"),
+    path('pelicula/<int:pelicula_id>/', views.detallepelicula, name='detallepelicula'),
+    path('serie/<int:serie_id>/', views.detalleserie, name='detalleserie'),
     path('archivo/<int:year>', views.archivo, name = "Archivo "),
 ]
