@@ -10,7 +10,6 @@
 
 #  Maria Cecilia Urrutia
 #  Inés Quinteros Seeber
-#  Viviana Rivas
 
 #Requierements:
 
